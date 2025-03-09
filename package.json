@@ -31,6 +31,7 @@
     "mini-css-extract-plugin": "^2.9.2",
     "sass": "^1.85.0",
     "sass-loader": "^16.0.5",
+    "sass-migrator": "^2.3.1",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
