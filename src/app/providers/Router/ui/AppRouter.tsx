@@ -12,7 +12,12 @@ export const AppRouter = () => {
                     Object.values(routeConfig)
                         .map(({ path, element }) =>
                             <Route
-                                element={element}
+                                element={
+                                    <div className='page-wrap'>
+                                        {element}
+                                    </div>
+                                    
+                                }
                                 key={path}
                                 path={path}
                             />)

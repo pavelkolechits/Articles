@@ -9,7 +9,7 @@ export function classNames(
 
     const modsEntries = Object.entries(mods).filter(([className, boolean]) => Boolean(boolean))
     const modsClassNames = modsEntries.map(([className, boolean]) => className)
-    const classNamesResult = [cls, ...modsClassNames, ...additional].join(' ')
+    const classNamesResult = [cls, ...modsClassNames, ...additional.filter(Boolean)].join(' ')
 
     return classNamesResult
 
