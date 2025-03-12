@@ -7,7 +7,9 @@
     "build:prod": "npx webpack --env mode=production",
     "build:dev": "npx webpack --env mode=development",
     "lint:ts": "npx eslint \"**/*.{ts,tsx}\"",
-    "lint:ts:fix": "npx eslint \"**/*.{ts,tsx}\" --fix"
+    "lint:ts:fix": "npx eslint \"**/*.{ts,tsx}\" --fix",
+    "lint:scss": "npx stylelint \"**/*.scss\"",
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,7 @@
     "babel-plugin-i18next-extract": "^1.0.0",
     "css-loader": "^7.1.2",
     "eslint": "^9.22.0",
+    "eslint-plugin-i18next": "^6.1.1",
     "eslint-plugin-react": "^7.37.4",
     "file-loader": "^6.2.0",
     "globals": "^16.0.0",
@@ -45,6 +48,8 @@
     "sass-loader": "^16.0.5",
     "sass-migrator": "^2.3.1",
     "style-loader": "^4.0.0",
+    "stylelint": "^16.15.0",
+    "stylelint-config-standard": "^37.0.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
