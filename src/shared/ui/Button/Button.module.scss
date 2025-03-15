@@ -8,3 +8,8 @@
     outline: none;
     border: none;
 }
+
+.outline {
+    border: var(--inverted-bg-color);
+    color: var(--inverted-bg-color);
+}
