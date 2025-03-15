@@ -20,4 +20,9 @@
       
     }
   },
+  "include": [
+    "./config/jest/jest-setup.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
 }

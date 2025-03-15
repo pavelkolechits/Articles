@@ -47,5 +47,12 @@ export default [
             'no-plusplus': 'off',
             'arrow-body-style': 'off',
         },
-    }
+        overrides: [{
+            files: ['**/src/**/*.test.{ts,tsx}'],
+            rules: {
+                'i18next/no-literal-string': 'off',
+            },
+        }],
+    },
+
 ];
