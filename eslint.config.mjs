@@ -7,15 +7,21 @@ import i18next from 'eslint-plugin-i18next'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-    { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
+    {
+        files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+        ignores: [
+            '**/src/**/*.test.{ts,tsx}',
+            '**/src/**/*.stories.{ts,tsx}'
+        ],
+    },
     { languageOptions: { globals: globals.browser } },
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
-    pluginReact.configs.flat.recommended,
+    pluginReact.configs.flat['jsx-runtime'],
     i18next.configs['flat/recommended'],
     {
         rules: {
-            'max-len': ['error', {
+            'max-len': ['warn', {
                 comments: 300,
                 code: 120,
             }],
@@ -47,12 +53,6 @@ export default [
             'no-plusplus': 'off',
             'arrow-body-style': 'off',
         },
-        overrides: [{
-            files: ['**/src/**/*.test.{ts,tsx}'],
-            rules: {
-                'i18next/no-literal-string': 'off',
-            },
-        }],
     },
 
 ];
