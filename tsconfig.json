@@ -11,17 +11,20 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["./src/*"]
-    }
+      "*": ["./src/*"],
+    },
+    // "resolveJsonModule": true
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS",
       
+      
     }
   },
   "include": [
     "./config/jest/jest-setup.ts",
+    "./src/**/*.json",
     "./src/**/*.ts",
     "./src/**/*.tsx"
   ],

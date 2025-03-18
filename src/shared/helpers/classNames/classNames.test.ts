@@ -1,4 +1,4 @@
-import { classNames } from "shared/helpers/classNames/classNames"
+import { classNames } from "./classNames"
 
 
 describe('classNames', () => {
@@ -44,3 +44,6 @@ describe('classNames', () => {
             .toBe('someClass mod1 cls1 cls2');
     })
 })
+
+
+
