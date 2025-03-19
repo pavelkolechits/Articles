@@ -1,3 +1,5 @@
 {
-    "language": "en"
+    "language": "en",
+    "main": "Main",
+    "about": "About"
 }

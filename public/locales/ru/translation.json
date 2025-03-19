@@ -1,9 +1,9 @@
 {
-    "Reload page": "Reload page",
-    "Something went wrong!": "Something went wrong!",
-    "about page": "about page",
-    "language": "lang",
-    "main page": "main page",
-    "main_page": "main_page",
-    "not found": "not found"
+    "Reload page": "Перезагрузить страницу",
+    "Something went wrong!": "Что-то пошло не так!",
+    "about page": "О нас",
+    "language": "ru",
+    "not found": "Страница не найдена",
+    "main": "Главная",
+    "about": "О нас"
   }

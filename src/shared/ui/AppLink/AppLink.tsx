@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { ReactNode } from 'react'
 import { LinkProps } from 'react-router-dom'
 
-type AppLinkTheme = 'primary' | 'secondary'
+type AppLinkTheme = 'primary' | 'inverted'
 
 interface AppLinkProps extends LinkProps {
     className?: string

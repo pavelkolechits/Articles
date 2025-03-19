@@ -18,6 +18,7 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps) => {
 
     return (
         <Button
+            theme='inverted-background'
             onClick={onToggleLanguage}
             className={classNames('', {}, [className])}>
             {t('language')}
