@@ -1,17 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Sidebar } from './Sidebar'
-import 'shared/config/i18n/i18nForTests'
-import { renderWithTranslation } from 'shared/helpers/tests/renderWithTranslation/renderWithTranslation'
+import { renderComponent } from 'shared/helpers/tests/renderComponent/renderComponent'
 
 
 
 describe('Sidebar', () => {
     test('render sidebar', () => {
-        renderWithTranslation(<Sidebar/>);
+        renderComponent(<Sidebar/>, {route : '/'})
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     })
     test('sidebar toggle', () => {
-        renderWithTranslation(<Sidebar/>);
+        renderComponent(<Sidebar/>);
         const toggleBtn = screen.getByTestId('toggle');
         fireEvent.click(toggleBtn);
         expect(screen.getByTestId('sidebar')).toHaveClass('collapsed');
