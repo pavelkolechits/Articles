@@ -8,7 +8,7 @@ type AppLinkTheme = 'primary' | 'inverted'
 
 interface AppLinkProps extends LinkProps {
     className?: string
-    children: ReactNode
+    children: ReactNode 
     theme?: AppLinkTheme
 }
 

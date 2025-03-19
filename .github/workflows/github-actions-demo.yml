@@ -1,4 +1,4 @@
-name: linting, testing, buildind
+name: linting, testing
 on: 
   push:
     branches: [master]

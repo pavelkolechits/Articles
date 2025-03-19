@@ -17,8 +17,11 @@ export const PageErrorFallback = (props: PageErrorFallbackProps) => {
 
     return (
         <div className={classNames(cls.PageErrorFallback, {}, [className])}>
-            <h1>{t('Something went wrong!')}</h1>
-            <Button theme='outline' onClick={reloadPage}>{t('Reload page')}</Button>
+            <div className={cls.content}>
+                <h1>{t('Something went wrong!')}</h1>
+                <Button theme='outline' onClick={reloadPage}>{t('Reload page')}</Button>
+            </div>
+
         </div>
     )
 }

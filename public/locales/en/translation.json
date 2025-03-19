@@ -1,5 +1,7 @@
 {
     "language": "en",
     "main": "Main",
-    "about": "About"
+    "about": "About",
+    "Something went wrong!": "Something went wrong!",
+    "Reload page": "Reload page"
 }
