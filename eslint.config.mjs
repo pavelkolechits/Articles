@@ -4,6 +4,7 @@ import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import i18next from 'eslint-plugin-i18next'
 import { globalIgnores } from "eslint/config"
+import reactHooks from 'eslint-plugin-react-hooks';
 
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -21,6 +22,7 @@ export default [
     ...tseslint.configs.recommended,
     pluginReact.configs.flat['jsx-runtime'],
     i18next.configs['flat/recommended'],
+    reactHooks.configs['recommended-latest'],
     {
         rules: {
             'max-len': ['warn', {

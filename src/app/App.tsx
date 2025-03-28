@@ -5,9 +5,10 @@ import './styles/index.scss'
 import { Navbar } from "widgets/Navbar"
 import { Sidebar } from "widgets/Sidebar"
 import 'shared/config/i18n/i18n'
-import { Suspense } from "react"
+import { Suspense, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { PageErrorFallback } from "widgets/PageErrorFallback"
+import { Modal } from "shared/ui/Modal/Modal"
 
 
 
@@ -15,12 +16,11 @@ import { PageErrorFallback } from "widgets/PageErrorFallback"
 
 
 export const App = () => {
-
     const { theme } = useTheme()
 
     return (
         <ErrorBoundary fallback={<PageErrorFallback/>}>
-            <div className={classNames('app', {}, [theme])}>
+            <div className='app'>
                 <Suspense fallback=''>
                     <Navbar />
                     <div className="content-page">
