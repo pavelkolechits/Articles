@@ -1,14 +1,15 @@
-import { useEffect } from "react"
+import { Counter } from "entities/Counter/ui/Counter"
 import { useTranslation } from "react-i18next"
 
 
 const AboutPage = () => {
-    const {t} = useTranslation('about')
-    useEffect(() => {
-        throw new Error()
-    },[])
+    const { t } = useTranslation('about')
+
     return (
-        <div>{t('about page')}</div>
+        <div>
+            
+            {t('about page')}
+        </div>
     )
 }
 export default AboutPage

@@ -1,6 +1,6 @@
 import { classNames } from 'shared/helpers/classNames/classNames'
 import cls from './Sidebar.module.scss'
-import { useState, useTransition } from 'react'
+import { useCallback, useState, useTransition } from 'react'
 import { ThemeSwitcher } from 'features/ThemeSwitcher'
 import { LanguageSwitcher } from 'features/LanguageSwitcher/ui/LanguageSwitcher'
 import { Button } from 'shared/ui/Button/Button'
@@ -20,9 +20,12 @@ export const Sidebar = (props: SidebarProps) => {
     const { t } = useTranslation()
     const [collapsed, setCollapsed] = useState(false)
 
-    const onToggle = () => {
+    const onToggle = useCallback(() => {
         setCollapsed(prev => !prev)
-    }
+    },[])
+
+  
+    document.addEventListener('click',(e) => console.log(e.target))
 
     return (
         <div
