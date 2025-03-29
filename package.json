@@ -12,7 +12,8 @@
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "unit": "npx jest --config ./config/jest/jest.config.ts",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
-    "build-storybook": "storybook build -c ./config/storybook"
+    "build-storybook": "storybook build -c ./config/storybook",
+    "server": "node ./json-server/index.js"
   },
   "repository": {
     "type": "git",
@@ -66,6 +67,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "json-server": "^0.17.4",
     "mini-css-extract-plugin": "^2.9.2",
     "sass": "^1.85.0",
     "sass-loader": "^16.0.5",
