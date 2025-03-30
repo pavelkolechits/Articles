@@ -8,7 +8,7 @@ describe('Button component', () => {
         render(<Button>click</Button>);
         expect(screen.getByText('click')).toBeInTheDocument()
     })
-    test('render button wicth clear theme', () => {
+    test('render button with clear theme', () => {
         render(<Button theme='clear'>click</Button>);
         expect(screen.getByText('click')).toHaveClass('clear')
     })

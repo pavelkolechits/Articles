@@ -6,11 +6,6 @@ import { createPortal } from 'react-dom'
 const meta = {
     title: 'shared/Modal',
     component: Modal,
-    // decorators: [
-    //     (Story) => (
-    //         createPortal(<Story/>, document.getElementById('portal'))
-    //     )
-    // ]
 } satisfies Meta<typeof Modal>
 
 export default meta

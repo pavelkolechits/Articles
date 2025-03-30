@@ -4,7 +4,7 @@ import { ChangeEvent, InputHTMLAttributes, memo, useEffect, useRef } from 'react
 
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'readonly' | 'max'>
-type TextAlign = 'center'|'start'|'end'
+type TextAlign = 'center' | 'start' | 'end'
 
 interface InputProps extends HTMLInputProps {
     className?: string;
@@ -23,7 +23,7 @@ interface InputProps extends HTMLInputProps {
 export const Input = memo((props: InputProps) => {
 
     const { className,
-        textAlign ='center',
+        textAlign = 'center',
         text,
         max,
         autofocus,
@@ -45,9 +45,19 @@ export const Input = memo((props: InputProps) => {
 
     };
     return (
-        <div className={classNames(cls.InputWrap, { [cls.readonly]: readonly, [cls.max]: max }, [])}>
-            {text && <div className={classNames(cls.text, {}, [cls[textAlign]])}>{text}</div>}
-            <input
+        <div
+            data-testid='input-wrap'
+            className={classNames(cls.InputWrap, { [cls.readonly]: readonly, [cls.max]: max }, [])}>
+
+            {text &&
+                <div
+                    data-testid='text'
+                    className={classNames(cls.text, {}, [cls[textAlign]])}
+                >
+                    {text}
+                </div>}
+                
+            <input data-testid='input'
                 className={
                     classNames(
                         cls.input,

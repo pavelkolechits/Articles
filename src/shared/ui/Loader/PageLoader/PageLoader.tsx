@@ -11,7 +11,7 @@ export const PageLoader = (props: PageLoaderProps) => {
     const { className } = props
 
     return (
-        <div className={classNames(cls.PageLoader, {}, [className])}>
+        <div data-testid='page-loader' className={classNames(cls.PageLoader, {}, [className])}>
             <Loader />
         </div>
     )

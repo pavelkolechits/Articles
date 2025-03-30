@@ -24,9 +24,6 @@ export const Sidebar = (props: SidebarProps) => {
         setCollapsed(prev => !prev)
     },[])
 
-  
-    document.addEventListener('click',(e) => console.log(e.target))
-
     return (
         <div
             data-testid='sidebar'

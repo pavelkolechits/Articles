@@ -6,7 +6,7 @@ import { renderComponent } from 'shared/helpers/tests/renderComponent/renderComp
 
 describe('Sidebar', () => {
     test('render sidebar', () => {
-        renderComponent(<Sidebar/>, {route : '/'})
+        renderComponent(<Sidebar/>)
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     })
     test('sidebar toggle', () => {

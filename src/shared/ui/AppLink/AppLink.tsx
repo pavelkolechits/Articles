@@ -24,6 +24,7 @@ export const AppLink = (props: AppLinkProps) => {
 
     return (
         <Link
+            data-testid='link'
             {...otherProps}
             to={to}
             className={classNames(cls.AppLink, {}, [className, cls[theme]])}>

@@ -48,7 +48,8 @@ export const Modal = (props: ModalProps) => {
     if (withoutPortal) {
         return (
             <div
-                onClick={()=>null}
+                data-testid='modal-without-portal'
+                onClick={onCloseHandler}
                 className={
                     classNames(cls.Modal, { [cls.opened]: isOpen, }, [className])}>
                 <div className={cls.overlay}>
@@ -70,11 +71,12 @@ export const Modal = (props: ModalProps) => {
     return (
         <Portal>
             <div
+                data-testid='modal'
                 onClick={onCloseHandler}
                 className={
                     classNames(cls.Modal, { [cls.opened]: isOpen, }, [className])}>
                 <div className={cls.overlay}>
-                    <div onClick={onContentClick}
+                    <div data-testid='content' onClick={onContentClick}
                         className={
                             classNames(
                                 cls.content,
