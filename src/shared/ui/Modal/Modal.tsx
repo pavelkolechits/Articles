@@ -6,14 +6,15 @@ import { Portal } from '../Portal/Portal';
 interface ModalProps {
     className?: string;
     children?: ReactNode;
-    isOpen?: boolean;
-    onClose?: () => void;
+    isOpen: boolean;
+    onClose: () => void;
+    withoutPortal?: boolean
 }
 
 const ANIMATION_DELAY = 300
 
 export const Modal = (props: ModalProps) => {
-    const { className, children, onClose, isOpen } = props
+    const { className, children, onClose, isOpen, withoutPortal = false } = props
 
     const [isClosing, setIsClosing] = useState(true)
     const timerRef = useRef<ReturnType<typeof setTimeout>>(null)
@@ -44,6 +45,28 @@ export const Modal = (props: ModalProps) => {
         }
     }, [isOpen, onKeyDown])
 
+    if (withoutPortal) {
+        return (
+            <div
+                onClick={()=>null}
+                className={
+                    classNames(cls.Modal, { [cls.opened]: isOpen, }, [className])}>
+                <div className={cls.overlay}>
+                    <div onClick={onContentClick}
+                        className={
+                            classNames(
+                                cls.content,
+                                {
+                                    [cls.closing]: isClosing,
+                                }, [])
+                        }>
+                        {children}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <Portal>
             <div
@@ -57,7 +80,6 @@ export const Modal = (props: ModalProps) => {
                                 cls.content,
                                 {
                                     [cls.closing]: isClosing,
-                                    [cls.contentOpened]: isOpen
                                 }, [])
                         }>
                         {children}

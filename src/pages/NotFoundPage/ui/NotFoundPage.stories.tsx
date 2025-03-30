@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { PageErrorFallback } from './PageErrorFallback'
+import  NotFoundPage  from './NotFoundPage'
 
 const meta = {
-    title: 'widgets/PageErrorFallback',
-    component: PageErrorFallback
-} satisfies Meta<typeof PageErrorFallback>
+    title: 'pages/NotFoundPage',
+    component: NotFoundPage
+} satisfies Meta<typeof NotFoundPage>
 
 export default meta
 

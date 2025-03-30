@@ -1,0 +1,66 @@
+import { classNames } from 'shared/helpers/classNames/classNames'
+import cls from './Input.module.scss'
+import { ChangeEvent, InputHTMLAttributes, memo, useEffect, useRef } from 'react';
+
+
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'readonly' | 'max'>
+type TextAlign = 'center'|'start'|'end'
+
+interface InputProps extends HTMLInputProps {
+    className?: string;
+    max?: boolean;
+    value?: string;
+    onChange?: (value: string) => void
+    autofocus?: boolean;
+    type?: React.HTMLInputTypeAttribute,
+    readonly?: boolean
+    text?: string;
+    textAlign?: TextAlign
+}
+
+
+
+export const Input = memo((props: InputProps) => {
+
+    const { className,
+        textAlign ='center',
+        text,
+        max,
+        autofocus,
+        type = 'text',
+        onChange,
+        readonly,
+        ...otherProps
+    } = props
+    const ref = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (autofocus) {
+            ref.current?.focus();
+        }
+    }, [autofocus]);
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        onChange?.(e.target.value);
+
+    };
+    return (
+        <div className={classNames(cls.InputWrap, { [cls.readonly]: readonly, [cls.max]: max }, [])}>
+            {text && <div className={classNames(cls.text, {}, [cls[textAlign]])}>{text}</div>}
+            <input
+                className={
+                    classNames(
+                        cls.input,
+                        { [cls.readonly]: readonly, [cls.max]: max },
+                        [className]
+                    )
+                }
+                type={type}
+                {...otherProps}
+                onChange={onChangeHandler}
+                readOnly={readonly}
+            />
+        </div>
+
+    )
+})

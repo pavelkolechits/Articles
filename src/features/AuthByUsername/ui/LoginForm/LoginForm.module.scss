@@ -1,0 +1,17 @@
+.LoginForm {
+    width: 500px;
+    min-width: 100px;
+    padding: 20px;
+    justify-content: space-between;
+    border: 1px solid var(--primary-color);
+}
+
+.inputs {
+    width: 100%;
+}
+
+.buttons {
+    margin: 5px;
+    display: flex;
+    justify-content: flex-end;
+}

@@ -26,7 +26,7 @@ const preview: Preview = {
             toolbar: {
                 title: 'Theme',
                 icon: 'circlehollow',
-                items: ['dark', 'normal', 'none'],
+                items: ['dark', 'normal',],
                 dynamicTitle: true,
             },
         },
@@ -56,15 +56,11 @@ const preview: Preview = {
                     theme = 'dark'
                     break;
                 }
-                case 'none' : {
-                    theme = ''
-                    break
-                }
                 default:
                     break;
             }
             return (
-                <div className={`app ${theme}`}>
+                <div id='story-portal' className={`app ${theme}`}>
                     <BrowserRouter>
                         <Suspense fallback={<div>loading translations...</div>}>
                             <I18nextProvider i18n={i18n}>

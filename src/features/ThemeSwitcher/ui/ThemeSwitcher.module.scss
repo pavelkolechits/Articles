@@ -1,3 +1,11 @@
 .icon {
     fill: var(--inverted-primary-color);
 }
+
+.story-theme-switcher {
+    background-color: var(--bg-color);
+
+    .icon {
+        fill: var(--primary-color);
+    }
+}

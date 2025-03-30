@@ -1,4 +1,3 @@
-import { Counter } from "entities/Counter/ui/Counter"
 import { useTranslation } from "react-i18next"
 
 
@@ -7,7 +6,6 @@ const AboutPage = () => {
 
     return (
         <div>
-            
             {t('about page')}
         </div>
     )

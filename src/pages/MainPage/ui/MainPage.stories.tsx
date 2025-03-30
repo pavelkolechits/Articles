@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { PageErrorFallback } from './PageErrorFallback'
+import  MainPage  from './MainPage'
 
 const meta = {
-    title: 'widgets/PageErrorFallback',
-    component: PageErrorFallback
-} satisfies Meta<typeof PageErrorFallback>
+    title: 'pages/MainPage',
+    component: MainPage
+} satisfies Meta<typeof MainPage>
 
 export default meta
 
@@ -14,3 +14,4 @@ export const Primary: Story = {
     args: {
     },
 }
+
