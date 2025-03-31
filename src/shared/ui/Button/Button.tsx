@@ -7,12 +7,14 @@ type ThemeButton = 'clear' | 'outline' | 'background' | 'inverted-background'
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string,
     children: ReactNode,
-    theme?: ThemeButton
+    theme?: ThemeButton,
+    disabled?: boolean
 }
 
 export const Button = (props: ButtonProps) => {
 
     const {
+        disabled,
         className,
         children,
         theme = 'clear',
@@ -21,8 +23,9 @@ export const Button = (props: ButtonProps) => {
 
     return (
         <button
+            disabled={disabled}
             {...otherProps}
-            className={classNames(cls.Button, {}, [className, cls[theme]])}
+            className={classNames(cls.Button, { [cls.disabled]: disabled }, [className, cls[theme]])}
         >
             {children}
         </button>

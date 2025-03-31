@@ -13,7 +13,8 @@
     "unit": "npx jest --config ./config/jest/jest.config.ts",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "build-storybook": "storybook build -c ./config/storybook",
-    "server": "node ./json-server/index.js"
+    "server": "node ./json-server/index.js",
+    "slice": "node ./scripts/generate-slice.js"
   },
   "repository": {
     "type": "git",
@@ -90,6 +91,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
+    "axios": "^1.8.4",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.4",
     "i18next-http-backend": "^3.0.2",

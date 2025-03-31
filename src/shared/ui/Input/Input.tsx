@@ -26,6 +26,7 @@ export const Input = memo((props: InputProps) => {
         textAlign = 'center',
         text,
         max,
+        value,
         autofocus,
         type = 'text',
         onChange,
@@ -56,8 +57,10 @@ export const Input = memo((props: InputProps) => {
                 >
                     {text}
                 </div>}
-                
-            <input data-testid='input'
+
+            <input
+                data-testid='input'
+                value={value}
                 className={
                     classNames(
                         cls.input,
@@ -71,6 +74,5 @@ export const Input = memo((props: InputProps) => {
                 readOnly={readonly}
             />
         </div>
-
     )
 })

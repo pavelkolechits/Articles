@@ -12,7 +12,7 @@ describe('Modal component', () => {
 
     test('render opened Modal without portal', () => {
         render(<Modal withoutPortal isOpen onClose={() => false}/>);
-        expect(screen.getByTestId('modal-without-portal')).toBeInTheDocument()
+        expect(screen.getByTestId('modal')).toBeInTheDocument()
     })
 
     test('render opened Modal without content', () => {

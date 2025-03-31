@@ -6,7 +6,7 @@ interface LoginModalProps {
     className?: string
     isOpen: boolean;
     onClose: () => void;
-    withoutPortal?: boolean
+    withoutPortal?: boolean;
 }
 
 export const LoginModal = (props: LoginModalProps) => {
@@ -14,7 +14,8 @@ export const LoginModal = (props: LoginModalProps) => {
     const { className, isOpen, onClose, withoutPortal } = props
 
     return (
-        <Modal 
+        <Modal
+            lazy 
             withoutPortal={withoutPortal}
             onClose={onClose}
             isOpen={isOpen}
@@ -23,5 +24,9 @@ export const LoginModal = (props: LoginModalProps) => {
             <LoginForm />
         </Modal>
     )
+
+
+
+
 }
 
