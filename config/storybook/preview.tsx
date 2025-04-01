@@ -6,6 +6,7 @@ import '../../src/app/styles/index.scss'
 import '../../src/app/styles/themes/dark.scss'
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../../src/shared/config/i18n/i18n';
+import { StoreProvider } from '../../src/app/providers/StoreProvider/ui/StoreProvider'
 
 const preview: Preview = {
     initialGlobals: {
@@ -61,13 +62,15 @@ const preview: Preview = {
             }
             return (
                 <div id='story-portal' className={`app ${theme}`}>
-                    <BrowserRouter>
-                        <Suspense fallback={<div>loading translations...</div>}>
-                            <I18nextProvider i18n={i18n}>
-                                <Story />
-                            </I18nextProvider>
-                        </Suspense>
-                    </BrowserRouter>
+                    <StoreProvider>
+                        <BrowserRouter>
+                            <Suspense fallback={<div>loading translations...</div>}>
+                                <I18nextProvider i18n={i18n}>
+                                    <Story />
+                                </I18nextProvider>
+                            </Suspense>
+                        </BrowserRouter>
+                    </StoreProvider>
                 </div>
             );
         },

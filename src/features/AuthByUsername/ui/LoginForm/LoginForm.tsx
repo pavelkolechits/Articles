@@ -7,12 +7,15 @@ import { useSelector } from 'react-redux'
 import { memo, useCallback } from 'react'
 import { loginActions } from '../../model/slices/loginSlice'
 import {
+    getLoginError,
     getLoginIsLoading,
     getLoginPassword,
     getLoginUsername
 } from '../../model/selectors/loginSelectors'
 import { loginByUsername } from '../../model/services/loginByUsename'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
+import { Text } from 'shared/ui/Text/Text'
+
 
 interface LoginFormProps {
     className?: string
@@ -26,6 +29,7 @@ export const LoginForm = memo((props: LoginFormProps) => {
     const username = useSelector(getLoginUsername)
     const password = useSelector(getLoginPassword)
     const isLoading = useSelector(getLoginIsLoading)
+    const error = useSelector(getLoginError)
 
     const onChangeUsername = useCallback((value: string) => {
         dispatch(loginActions.setUsername(value))
@@ -39,13 +43,16 @@ export const LoginForm = memo((props: LoginFormProps) => {
         dispatch(loginByUsername({ username, password }))
     }, [dispatch, password, username])
 
+
     return (
         <div className={classNames(cls.LoginForm, {}, [className])}>
-            <div className={cls.intups}>
+            <Text align='center' title={t('Login form')} />
+            {error && <Text theme='error' text={error} />}
+            <div className={cls.inputWrap}>
                 <Input value={username} onChange={onChangeUsername} max text='username' type="text" />
                 <Input value={password} onChange={onChangePassword} max text='password' type="password" />
             </div>
-            <div className={cls.buttons}>
+            <div className={cls.buttonWrap}>
                 <Button disabled={isLoading} onClick={onLogin} theme='outline'>{t('login')}</Button>
             </div>
         </div>

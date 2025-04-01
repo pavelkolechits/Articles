@@ -13,26 +13,30 @@ type Story = StoryObj<typeof meta>
 export const Clear: Story = {
     args: {
         theme: 'clear',
-        children: 'button'
+        children: 'button',
+        disabled: false
     },
 }
 
 export const Outline: Story = {
     args: {
         theme: 'outline',
-        children: 'button'
+        children: 'button',
+        disabled: false
     },
 }
 export const Background: Story = {
     args: {
         theme: 'background',
-        children: 'button'
+        children: 'button',
+        disabled: false
     },
 }
 
 export const InvertedBackground: Story = {
     args: {
         theme: 'inverted-background',
-        children: 'button'
+        children: 'button',
+        disabled: false
     },
 }

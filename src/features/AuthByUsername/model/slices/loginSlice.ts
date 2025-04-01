@@ -1,6 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, PrepareAction, SerializedError } from '@reduxjs/toolkit'
 import { LoginSchema } from '../types/loginSchema'
 import { loginByUsername } from '../services/loginByUsename'
+import { AxiosError } from 'axios'
+
 
 const initialState: LoginSchema = {
     username: '',
@@ -33,9 +35,10 @@ const loginSlice = createSlice({
             }
         ),
         builder.addCase(
-            loginByUsername.rejected, (state, action) => {
+            loginByUsername.rejected, (state, action: PayloadAction<SerializedError>) => {
                 state.isLoading = false
-                state.error = action.error.message
+                state.error = action.payload.message
+    
             }
         )
     },
