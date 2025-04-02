@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import cls from './LoginForm.module.scss'
 import { Button } from 'shared/ui/Button/Button'
 import { Input } from 'shared/ui/Input/Input'
-import { useSelector, useStore } from 'react-redux'
-import { memo, useCallback, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { memo, useCallback } from 'react'
 import { loginActions, loginReducer } from '../../model/slices/loginSlice'
 import {
     getLoginError,
@@ -15,15 +15,16 @@ import {
 import { loginByUsername } from '../../model/services/loginByUsename'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { Text } from 'shared/ui/Text/Text'
-import { ReduxStoreWithManager } from 'app/providers/StoreProvider/config/StateSchema'
+import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
 
 
 interface LoginFormProps {
     className?: string
 }
+const dynamicReducersProps: UseDynamicReducersProps = { reducers: { login: loginReducer } }
 
 const LoginForm = memo((props: LoginFormProps) => {
-    const store = useStore() as ReduxStoreWithManager
+
     const { className } = props
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
@@ -31,12 +32,9 @@ const LoginForm = memo((props: LoginFormProps) => {
     const password = useSelector(getLoginPassword)
     const isLoading = useSelector(getLoginIsLoading)
     const error = useSelector(getLoginError)
-    
-    useEffect(() => {
-        store.reducerManager.add('login', loginReducer)
-    },[])
 
-    
+    useDynamicReducers(dynamicReducersProps)
+
     const onChangeUsername = useCallback((value: string) => {
         dispatch(loginActions.setUsername(value))
     }, [dispatch])
@@ -48,9 +46,6 @@ const LoginForm = memo((props: LoginFormProps) => {
     const onLogin = useCallback(() => {
         dispatch(loginByUsername({ username, password }))
     }, [dispatch, password, username])
-
-    
-
 
     return (
         <div className={classNames(cls.LoginForm, {}, [className])}>
