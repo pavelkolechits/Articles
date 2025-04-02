@@ -1,23 +1,26 @@
-import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
-import { StateSchema } from './StateSchema'
+import { Action, configureStore, EnhancedStore, Reducer, ReducersMapObject, ThunkDispatch } from '@reduxjs/toolkit'
+import { ReduxStoreWithManager, StateSchema } from './StateSchema'
 import { userReducer } from 'entities/User'
-import { loginReducer } from 'features/AuthByUsername'
+import { createReducerManager } from './reducerManager'
 
-export function createReduxStore(initialState: StateSchema) {
+export function createReduxStore(initialState: StateSchema): ReduxStoreWithManager {
 
 
     const rootReducers: ReducersMapObject<StateSchema> = {
         user: userReducer,
-        login: loginReducer
     }
+    const reducerManager = createReducerManager(rootReducers)
 
-    return configureStore<StateSchema>({
-        reducer: rootReducers,
+    const store = configureStore<StateSchema>({
+        reducer: reducerManager.reduce,
         devTools: __IS_DEV__,
         preloadedState: initialState
-    })
+    }) as ReduxStoreWithManager
+
+    store.reducerManager = reducerManager
+
+    return store
 }
 
-export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];
 
-
+export type AppDispatch = ThunkDispatch<StateSchema, undefined, Action>

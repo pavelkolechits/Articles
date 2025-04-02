@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction, PrepareAction, SerializedError } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
 import { LoginSchema } from '../types/loginSchema'
 import { loginByUsername } from '../services/loginByUsename'
-import { AxiosError } from 'axios'
+
 
 
 const initialState: LoginSchema = {

@@ -56,7 +56,8 @@ export default [
             'no-param-reassign': 'off',
             'no-plusplus': 'off',
             'arrow-body-style': 'off',
-            "@typescript-eslint/no-unused-expressions": "off"
+            "@typescript-eslint/no-unused-expressions": "off",
+            "prefer-const": "warn"
         },
     },
 
