@@ -14,7 +14,7 @@ export interface UseDynamicReducersProps {
 }
 
 export function useDynamicReducers(props: UseDynamicReducersProps) {
-    const { reducers, removeAfterAnmount = false } = props
+    const { reducers, removeAfterAnmount = true } = props
     const store = useStore() as ReduxStoreWithManager
     const dispatch = useAppDispatch()
 

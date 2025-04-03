@@ -22,5 +22,5 @@ export function createReduxStore(initialState: StateSchema): ReduxStoreWithManag
     return store
 }
 
-
+export type AppStore = ReturnType<typeof createReduxStore>
 export type AppDispatch = ThunkDispatch<StateSchema, undefined, Action>

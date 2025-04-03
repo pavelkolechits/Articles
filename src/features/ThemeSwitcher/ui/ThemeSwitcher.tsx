@@ -3,6 +3,7 @@ import { Button } from 'shared/ui/Button/Button'
 import { useTheme } from 'shared/hoocs/useTheme/useTheme'
 import DarkIcon from 'shared/assets/icons/themeDark.svg'
 import cls from './ThemeSwitcher.module.scss'
+import { memo } from 'react'
 
 
 
@@ -10,7 +11,7 @@ interface ThemeSwitcherProps {
     className?: string
 }
 
-export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
+export const ThemeSwitcher = memo((props: ThemeSwitcherProps) => {
 
     const { className } = props
     const { toggleTheme } = useTheme()
@@ -25,4 +26,4 @@ export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
             />
         </Button>
     )
-}
+})

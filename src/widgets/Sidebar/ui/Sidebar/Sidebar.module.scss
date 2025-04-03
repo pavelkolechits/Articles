@@ -34,22 +34,6 @@
 
 }
 
-.link {
-    margin: 7px 20px;
-    display: flex;
-    align-items: start;
-    transition: opacity 0.2s;
-
-    &:hover {
-        opacity: 0.8;
-    }
-}
-
-
-.icon {
-    fill: var(--inverted-primary-color);
-    margin: 0 10px;
-}
 
 .collapsed {
     width: var(--sidebar-width-collapsed);

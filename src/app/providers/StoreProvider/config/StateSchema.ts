@@ -3,13 +3,15 @@ import { UserSchema } from "entities/User";
 import { LoginSchema } from "features/AuthByUsername";
 import { Reducer } from "react";
 import { createReducerManager } from "./reducerManager";
+import { ProfileSchema } from "entities/Profile";
 
 
 
 
 export interface StateSchema {
     user: UserSchema;
-    login?: LoginSchema
+    login?: LoginSchema;
+    profile?: ProfileSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

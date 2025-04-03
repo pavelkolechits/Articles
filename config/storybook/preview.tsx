@@ -7,6 +7,7 @@ import '../../src/app/styles/themes/dark.scss'
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../../src/shared/config/i18n/i18n';
 import { StoreProvider } from '../../src/app/providers/StoreProvider/ui/StoreProvider'
+import { StateSchema } from '../../src/app/providers/StoreProvider/config/StateSchema';
 
 const preview: Preview = {
     initialGlobals: {
@@ -60,9 +61,16 @@ const preview: Preview = {
                 default:
                     break;
             }
+            const store: Partial<StateSchema> = {
+                login: {
+                    username: 'user',
+                    password: '12345',
+                    isLoading: false
+                }
+            }
             return (
                 <div id='story-portal' className={`app ${theme}`}>
-                    <StoreProvider>
+                    <StoreProvider initialState={store as StateSchema}>
                         <BrowserRouter>
                             <Suspense fallback={<div>loading translations...</div>}>
                                 <I18nextProvider i18n={i18n}>

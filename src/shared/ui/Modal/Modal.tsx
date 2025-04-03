@@ -1,5 +1,5 @@
 import { classNames } from 'shared/helpers/classNames/classNames'
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import cls from './Modal.module.scss'
 import { Portal } from '../Portal/Portal';
 
