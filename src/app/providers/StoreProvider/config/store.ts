@@ -1,5 +1,13 @@
-import { Action, configureStore, ReducersMapObject, ThunkDispatch } from '@reduxjs/toolkit'
-import { ReduxStoreWithManager, StateSchema } from './StateSchema'
+import {
+    Action,
+    configureStore,
+    ReducersMapObject,
+    ThunkDispatch,
+    ThunkMiddleware,
+    Tuple,
+    UnknownAction
+} from '@reduxjs/toolkit'
+import { ReduxStoreWithManager, StateSchema, ThunkExtraArgs } from './StateSchema'
 import { userReducer } from 'entities/User'
 import { createReducerManager } from './reducerManager'
 import { $api } from 'shared/api/api'
@@ -12,18 +20,22 @@ export function createReduxStore(initialState: StateSchema): ReduxStoreWithManag
     }
     const reducerManager = createReducerManager(rootReducers)
 
-    const store = configureStore<StateSchema>({
-        reducer: reducerManager.reduce,
-        devTools: __IS_DEV__,
-        preloadedState: initialState,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-            thunk: {
-                extraArgument: {
-                    api: $api
-                }
-            }
-        })
-    }) as ReduxStoreWithManager
+    const extraArgs: ThunkExtraArgs = {
+        api: $api
+    }
+
+    const store = configureStore<
+        StateSchema,
+        UnknownAction,
+        Tuple<[ThunkMiddleware<StateSchema, UnknownAction, ThunkExtraArgs>]>>({
+            reducer: reducerManager.reduce,
+            devTools: __IS_DEV__,
+            preloadedState: initialState,
+            middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+                thunk:
+                    { extraArgument: extraArgs }
+            })
+        }) as ReduxStoreWithManager
 
     store.reducerManager = reducerManager
 
@@ -31,4 +43,4 @@ export function createReduxStore(initialState: StateSchema): ReduxStoreWithManag
 }
 
 export type AppStore = ReturnType<typeof createReduxStore>
-export type AppDispatch = ThunkDispatch<StateSchema, undefined, Action>
+export type AppDispatch = ThunkDispatch<StateSchema, ThunkExtraArgs, Action>

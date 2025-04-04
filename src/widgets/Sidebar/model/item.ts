@@ -5,8 +5,8 @@ import ProfileIcon from 'shared/assets/icons/profileIcon.svg'
 
 export interface SidebarItemType {
     path: string;
-    text?: string;
-    Icon?: React.FC<React.SVGProps<SVGSVGElement>>
+    text: string;
+    Icon: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
 

@@ -35,9 +35,9 @@ const loginSlice = createSlice({
             }
         ),
         builder.addCase(
-            loginByUsername.rejected, (state, action: PayloadAction<SerializedError>) => {
+            loginByUsername.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload.message
+                state.error = action.error as string
     
             }
         )

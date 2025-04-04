@@ -44,7 +44,7 @@ const LoginForm = memo((props: LoginFormProps) => {
     }, [dispatch])
 
     const onLogin = useCallback(() => {
-        dispatch(loginByUsername({ username, password }))
+        dispatch(loginByUsername({username,password}))
     }, [dispatch, password, username])
 
     return (

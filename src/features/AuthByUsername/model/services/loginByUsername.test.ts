@@ -21,7 +21,7 @@ describe('loginByUsername', () => {
         const userData = { username: 'admin', id: "1" }
         mockedAxios.post.mockReturnValue(Promise.resolve({ data: userData }))
         const action = loginByUsername({ username: '123', password: '123' })
-        const result = await action(dispatch, getState, undefined)
+
 
         expect(mockedAxios.post).toHaveBeenCalled()
         expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userData))
@@ -30,7 +30,7 @@ describe('loginByUsername', () => {
 
         mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }))
         const action = loginByUsername({ username: '123', password: '123' })
-        const result = await action(dispatch, getState, undefined)
+
 
        
         expect(dispatch).toHaveBeenCalledTimes(2)

@@ -1,5 +1,5 @@
 import { classNames } from 'shared/helpers/classNames/classNames'
-import { memo, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, MutableRefObject, ReactNode, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import cls from './Modal.module.scss'
 import { Portal } from '../Portal/Portal';
 
@@ -17,7 +17,7 @@ const ANIMATION_DELAY = 300
 export const Modal = (props: ModalProps) => {
     const { className, children, onClose, isOpen, withoutPortal = false, lazy } = props
     const [isClosing, setIsClosing] = useState(true)
-    const timerRef = useRef<ReturnType<typeof setTimeout>>(null)
+    const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
     const [isMounted, setIsMounted] = useState(false)
 
     const onCloseHandler = useCallback(() => {
@@ -46,6 +46,7 @@ export const Modal = (props: ModalProps) => {
             document.addEventListener('keydown', onKeyDown)
         }
         return () => {
+
             clearTimeout(timerRef.current)
             document.removeEventListener('keydown', onKeyDown)
         }

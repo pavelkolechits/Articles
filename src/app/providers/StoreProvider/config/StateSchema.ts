@@ -1,9 +1,10 @@
-import { EnhancedStore } from "@reduxjs/toolkit";
+import { EnhancedStore, SerializedError } from "@reduxjs/toolkit";
 import { UserSchema } from "entities/User";
 import { LoginSchema } from "features/AuthByUsername";
 import { createReducerManager } from "./reducerManager";
 import { ProfileSchema } from "entities/Profile";
 import { AxiosInstance } from "axios";
+import { AppDispatch } from "./store";
 
 
 
@@ -27,7 +28,7 @@ export interface ThunkExtraArgs {
     api: AxiosInstance
 }
 
-export interface ThunkConfig<T>{
-    rejectValue: T;
+export interface ThunkConfig{
+    rejectValue: SerializedError;
     extra: ThunkExtraArgs;
 }
