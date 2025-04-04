@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npx webpack serve --env port=3000 ",
+    "start": "npx webpack serve --env port=3000 apiUrl=http://localhost:8000 ",
     "build:prod": "npx webpack --env mode=production",
     "build:dev": "npx webpack --env mode=development",
     "lint:ts": "npx eslint \"**/*.{ts,tsx}\"",

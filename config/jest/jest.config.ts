@@ -5,6 +5,10 @@ import type { Config } from 'jest';
 const config: Config = {
     clearMocks: true,
     coveragePathIgnorePatterns: ['\\\\node_modules\\\\'],
+    globals: {
+        __IS_DEV__: true,
+        __API_URL__: ''
+    },
     coverageReporters: [
         "json",
         "text",

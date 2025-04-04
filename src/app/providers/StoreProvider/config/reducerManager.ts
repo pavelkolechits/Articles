@@ -1,5 +1,5 @@
-import { Action, combineReducers, Reducer, ReducersMapObject, UnknownAction } from "@reduxjs/toolkit"
-import { ReducerManager, StateSchema, StateSchemaKey } from "./StateSchema"
+import { Action, combineReducers, Reducer, ReducersMapObject } from "@reduxjs/toolkit"
+import { StateSchema, StateSchemaKey } from "./StateSchema"
 
 export type Reducers = Record<StateSchemaKey, Reducer>
 
