@@ -1,9 +1,11 @@
 {
-    "Reload page": "Перезагрузить страницу",
-    "Something went wrong!": "Что-то пошло не так!",
-    "about page": "О нас",
-    "language": "ru",
-    "not found": "Страница не найдена",
-    "main": "Главная",
-    "about": "О нас"
-  }
+  "Login": "Войти",
+  "Logout": "Выйти",
+  "about": "О нас",
+  "about page": "about page",
+  "language": "ru",
+  "main": "Главная",
+  "main page": "main page",
+  "not found": "not found",
+  "profile": "Профиль"
+}

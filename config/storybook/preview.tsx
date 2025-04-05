@@ -63,7 +63,7 @@ const preview: Preview = {
             }
             const store: Partial<StateSchema> = {
                 login: {
-                    username: 'user',
+                    email: 'user',
                     password: '12345',
                     isLoading: false
                 }

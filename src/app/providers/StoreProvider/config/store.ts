@@ -12,22 +12,21 @@ import { userReducer } from 'entities/User'
 import { createReducerManager } from './reducerManager'
 import { $api } from 'shared/api/api'
 
+const extraArgs: ThunkExtraArgs = {
+    api: $api
+}
+
 export function createReduxStore(initialState: StateSchema): ReduxStoreWithManager {
-
-
     const rootReducers: ReducersMapObject<StateSchema> = {
         user: userReducer,
     }
     const reducerManager = createReducerManager(rootReducers)
-
-    const extraArgs: ThunkExtraArgs = {
-        api: $api
-    }
-
+   
     const store = configureStore<
         StateSchema,
         UnknownAction,
         Tuple<[ThunkMiddleware<StateSchema, UnknownAction, ThunkExtraArgs>]>>({
+            
             reducer: reducerManager.reduce,
             devTools: __IS_DEV__,
             preloadedState: initialState,
@@ -38,7 +37,6 @@ export function createReduxStore(initialState: StateSchema): ReduxStoreWithManag
         }) as ReduxStoreWithManager
 
     store.reducerManager = reducerManager
-
     return store
 }
 

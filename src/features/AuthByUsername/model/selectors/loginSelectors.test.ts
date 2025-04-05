@@ -1,11 +1,11 @@
 import { StateSchema } from 'app/providers/StoreProvider/config/StateSchema'
-import { getLoginError, getLoginIsLoading, getLoginPassword, getLoginUsername } from './loginSelectors'
+import { getLoginError, getLoginIsLoading, getLoginPassword, getLoginEmail } from './loginSelectors'
 
 describe('loginSelectors', () => {
     const state: Partial<StateSchema> = {
         login: {
             error: 'error',
-            username: 'user',
+            email: 'user',
             password: '123',
             isLoading: false
         }
@@ -18,7 +18,7 @@ describe('loginSelectors', () => {
         expect(getLoginError(state as StateSchema)).toEqual('error')
     })
     test('should return user', () => {
-        expect(getLoginUsername(state as StateSchema)).toEqual('user')
+        expect(getLoginEmail(state as StateSchema)).toEqual('user')
     })
     test('should return password', () => {
         expect(getLoginPassword(state as StateSchema)).toEqual('123')
@@ -33,7 +33,7 @@ describe('loginSelectors', () => {
         expect(getLoginError(emptyState as StateSchema)).toEqual(undefined)
     })
     test('get user with empty state', () => {
-        expect(getLoginUsername(emptyState as StateSchema)).toEqual('')
+        expect(getLoginEmail(emptyState as StateSchema)).toEqual('')
     })
     test('get password with empty state', () => {
         expect(getLoginPassword(emptyState as StateSchema)).toEqual('')

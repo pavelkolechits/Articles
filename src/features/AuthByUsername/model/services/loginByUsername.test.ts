@@ -18,9 +18,9 @@ describe('loginByUsername', () => {
     })
 
     test('loginByUsername', async () => {
-        const userData = { username: 'admin', id: "1" }
+        const userData = { email: 'admin', id: "1" }
         mockedAxios.post.mockReturnValue(Promise.resolve({ data: userData }))
-        const action = loginByUsername({ username: '123', password: '123' })
+        const action = loginByUsername({ email: '123', password: '123' })
 
 
         expect(mockedAxios.post).toHaveBeenCalled()
@@ -29,7 +29,7 @@ describe('loginByUsername', () => {
     test('loginByUsername error', async () => {
 
         mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }))
-        const action = loginByUsername({ username: '123', password: '123' })
+        const action = loginByUsername({ email: '123', password: '123' })
 
 
        

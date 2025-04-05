@@ -7,10 +7,10 @@ import { useSelector } from 'react-redux'
 import { memo, useCallback } from 'react'
 import { loginActions, loginReducer } from '../../model/slices/loginSlice'
 import {
+    getLoginEmail,
     getLoginError,
     getLoginIsLoading,
     getLoginPassword,
-    getLoginUsername
 } from '../../model/selectors/loginSelectors'
 import { loginByUsername } from '../../model/services/loginByUsename'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
@@ -26,9 +26,9 @@ const dynamicReducersProps: UseDynamicReducersProps = { reducers: { login: login
 const LoginForm = memo((props: LoginFormProps) => {
 
     const { className } = props
-    const { t } = useTranslation()
+    const { t } = useTranslation('login')
     const dispatch = useAppDispatch()
-    const username = useSelector(getLoginUsername)
+    const email = useSelector(getLoginEmail)
     const password = useSelector(getLoginPassword)
     const isLoading = useSelector(getLoginIsLoading)
     const error = useSelector(getLoginError)
@@ -44,16 +44,16 @@ const LoginForm = memo((props: LoginFormProps) => {
     }, [dispatch])
 
     const onLogin = useCallback(() => {
-        dispatch(loginByUsername({username,password}))
-    }, [dispatch, password, username])
+        dispatch(loginByUsername({ email, password }))
+    }, [dispatch, password, email])
 
     return (
         <div className={classNames(cls.LoginForm, {}, [className])}>
-            <Text align='center' title={t('Login form')} />
+            <Text align='center' title={t('login form')} />
             {error && <Text theme='error' text={error} />}
             <div className={cls.inputWrap}>
-                <Input value={username} onChange={onChangeUsername} max text='username' type="text" />
-                <Input value={password} onChange={onChangePassword} max text='password' type="password" />
+                <Input value={email} onChange={onChangeUsername} max text={t('username')} type="text" />
+                <Input value={password} onChange={onChangePassword} max text={t('password')} type="password" />
             </div>
             <div className={cls.buttonWrap}>
                 <Button disabled={isLoading} onClick={onLogin} theme='outline'>{t('login')}</Button>

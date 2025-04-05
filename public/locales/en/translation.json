@@ -1,7 +1,17 @@
 {
+    "Login": "Login",
+ 
+    "Logout": "Logout",
+
+    "Reload page": "Reload page",
+
+    "about": "about",
+    "about page": "about page",
     "language": "en",
-    "main": "Main",
-    "about": "About",
-    "Something went wrong!": "Something went wrong!",
-    "Reload page": "Reload page"
-}
+    "profile": "profile",
+    "main": "main",
+    "main page": "main page",
+    "nav": "nav",
+    "not found": "not found"
+   
+  }

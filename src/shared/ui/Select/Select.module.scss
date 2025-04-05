@@ -1,0 +1,50 @@
+.SelectWrap {
+    display: flex;
+    align-items: center;
+}
+
+.select {
+    border: 1px solid var(--primary-color);
+    outline: none;
+    background-color: inherit;
+    color: var(--primary-color);
+    padding: 5px;
+    font-family: var(--font-family-main) ;
+    margin: 5px;
+    width: 70%;
+
+    &.readonly {
+        opacity: 0.7;
+    }
+}
+
+
+.label {
+    margin: 5px 0 0 5px;
+    display: flex;
+    word-break: keep-all;
+    width: 30%;
+
+    &.readonly {
+        opacity: 0.7;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+   
+    &.start {
+        justify-content: start;
+    }
+
+    &.end {
+        justify-content: end;
+    }
+}
+
+.option {
+    background-color: var(--inverted-bg-color);
+    color: var(--inverted-primary-color)
+  }
+
+
