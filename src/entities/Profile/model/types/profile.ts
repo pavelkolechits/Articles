@@ -4,19 +4,20 @@ import { Currency } from "entities/Currency";
 
 
 export interface Profile {
-    id: string,
-    lastname: string,
-    age: number,
-    currency: Currency,
-    country: Country,
-    city: string,
-    username: string,
-    avatar: string
-    firstname: string
+    id?: string,
+    lastname?: string,
+    age?: string,
+    currency?: Currency,
+    country?: Country,
+    city?: string,
+    email?: string,
+    avatar?: string
+    firstname?: string
 }
 
 export interface ProfileSchema {
-    data: Profile | undefined;
+    data?: Profile;
+    formData?: Profile;
     isLoading: boolean;
     error?: string;
     readonly?: boolean

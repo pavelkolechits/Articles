@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import cls from './Select.module.scss'
 import { Input } from '../Input/Input';
 import { ChangeEvent, memo, useCallback, useMemo, useState } from 'react';
+import { Country } from 'entities/Country';
 
 export interface SelectOptions {
     text: string;
@@ -21,14 +22,14 @@ interface SelectProps {
     onChange?: (value: string) => void
 }
 
-export const Select = memo((props: SelectProps) => {
+export const Select = (props: SelectProps) => {
 
     const { className, label, textAlign = 'center', readonly, options, value, onChange } = props
     const { t } = useTranslation()
 
     const optionList = useMemo(() => {
         return options?.map((opt) =>
-            <option
+            <option 
                 key={opt.value}
                 className={cls.option}
                 value={opt.value}
@@ -46,7 +47,7 @@ export const Select = memo((props: SelectProps) => {
         <div className={classNames(cls.SelectWrap, {}, [className])}>
             {label &&
                 <div
-                    className={classNames(cls.label, { [cls.readonly]: readonly }, [cls[textAlign]])}
+                    className={classNames(cls.label, { }, [cls[textAlign]])}
                 >
                     {label}
                 </div>}
@@ -60,4 +61,4 @@ export const Select = memo((props: SelectProps) => {
             </select>
         </div>
     )
-})
+}

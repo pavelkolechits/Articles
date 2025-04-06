@@ -9,8 +9,8 @@ type TextAlign = 'center' | 'start' | 'end'
 interface InputProps extends HTMLInputProps {
     className?: string;
     max?: boolean;
-    value?: string;
-    onChange?: (value: string) => void
+    value?: string | number;
+    onChange?: (value: string) => void;
     autofocus?: boolean;
     type?: React.HTMLInputTypeAttribute,
     readonly?: boolean
@@ -43,8 +43,9 @@ export const Input = memo((props: InputProps) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value);
-
     };
+    
+
     return (
         <div
             data-testid='input-wrap'

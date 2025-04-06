@@ -1,5 +1,5 @@
 import { createAsyncThunk, SerializedError } from "@reduxjs/toolkit";
-import { Profile } from "../../../../entities/Profile/model/types/profile";
+import { Profile } from "../../../../../entities/Profile/model/types/profile";
 import { ThunkConfig } from "app/providers/StoreProvider";
 
 

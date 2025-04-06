@@ -6,17 +6,15 @@
       "password": "123"
     }
   ],
-  "profile": 
-    {
-      "id": "1",
-      "lastname": "asfewr",
-      "age": "30",
-      "currency": "USD",
-      "country": "Ukraine",
-      "city": "Moscow",
-      "username": "admin213",
-      "avatar": "https://img.freepik.com/premium-photo/man-hoodie-stands-front-computer-screen-with-green-numbers-it_927094-96.jpg?size=626&ext=jpg",
-      "firstname": "byblik"
-    }
-  
+  "profile": {
+    "id": "1",
+    "lastname": "asfewr",
+    "age": "30",
+    "currency": "EUR",
+    "country": "Belarus",
+    "city": "Moscow",
+    "email": "admin@mail.ru",
+    "avatar": "https://img.freepik.com/premium-photo/man-hoodie-stands-front-computer-screen-with-green-numbers-it_927094-96.jpg?size=626&ext=jpg",
+    "firstname": "byblik"
+  }
 }

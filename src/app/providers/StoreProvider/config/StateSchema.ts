@@ -31,4 +31,5 @@ export interface ThunkExtraArgs {
 export interface ThunkConfig{
     rejectValue: SerializedError;
     extra: ThunkExtraArgs;
+    state: StateSchema
 }

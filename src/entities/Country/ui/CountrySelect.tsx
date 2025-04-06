@@ -3,9 +3,13 @@ import { useTranslation } from 'react-i18next'
 import cls from './CountrySelect.module.scss'
 import { Select, SelectOptions } from 'shared/ui/Select/Select'
 import { Country } from '../model/types/country'
+import { memo, useCallback } from 'react'
 
 interface CountrySelectProps {
-    className?: string
+    className?: string;
+    onChange?: (value: Country) => void;
+    value?: Country;
+    readonly?: boolean
 }
 
 const options: SelectOptions[] = [
@@ -16,12 +20,15 @@ const options: SelectOptions[] = [
     { value: Country.Ukraine, text: Country.Ukraine }
 ]
 
-export const CountrySelect = (props: CountrySelectProps) => {
+export const CountrySelect = memo((props: CountrySelectProps) => {
 
-    const { className } = props
+    const { className, onChange, value, readonly } = props
     const { t } = useTranslation()
 
-    return <Select label="Country" options={options} />
+    const onChangeCountry = useCallback((value: string) => {
+        onChange?.(value as Country)
+    }, [onChange])
 
+    return <Select readonly={readonly} value={value} onChange={onChangeCountry} label="Country" options={options} />
 
-}
+})
