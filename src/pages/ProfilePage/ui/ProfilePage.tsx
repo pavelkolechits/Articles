@@ -9,7 +9,7 @@ import { EditableProfileCard, fetchProfileData, profileReducer } from 'features/
 interface ProfilePageProps {
     className?: string
 }
-const dynamicReducersProps: UseDynamicReducersProps = { reducers: { profile: profileReducer } }
+const dynamicReducersProps: UseDynamicReducersProps = { reducers: { profile: profileReducer }, removeAfterAnmount: false }
 
 const ProfilePage = (props: ProfilePageProps) => {
 

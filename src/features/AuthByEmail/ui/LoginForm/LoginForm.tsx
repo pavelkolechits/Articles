@@ -12,7 +12,7 @@ import {
     getLoginIsLoading,
     getLoginPassword,
 } from '../../model/selectors/loginSelectors'
-import { loginByUsername } from '../../model/services/loginByUsename'
+import { loginByEmail } from '../../model/services/loginByEmail'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { Text } from 'shared/ui/Text/Text'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
@@ -44,16 +44,28 @@ const LoginForm = memo((props: LoginFormProps) => {
     }, [dispatch])
 
     const onLogin = useCallback(() => {
-        dispatch(loginByUsername({ email, password }))
+        dispatch(loginByEmail({ email, password }))
     }, [dispatch, password, email])
 
     return (
         <div className={classNames(cls.LoginForm, {}, [className])}>
             <Text align='center' title={t('login form')} />
-            {error && <Text theme='error' text={error} />}
+            {error && <Text theme='error' text={error}/>}
             <div className={cls.inputWrap}>
-                <Input value={email} onChange={onChangeUsername} max text={t('username')} type="text" />
-                <Input value={password} onChange={onChangePassword} max text={t('password')} type="password" />
+                <Input
+                    textAlign='start'
+                    value={email}
+                    onChange={onChangeUsername}
+                    max
+                    text={t('email')}
+                    type="text" />
+                <Input
+                    textAlign='start'
+                    value={password}
+                    onChange={onChangePassword}
+                    max
+                    text={t('password')}
+                    type="password" />
             </div>
             <div className={cls.buttonWrap}>
                 <Button disabled={isLoading} onClick={onLogin} theme='outline'>{t('login')}</Button>

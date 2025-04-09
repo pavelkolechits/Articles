@@ -1,17 +1,14 @@
 {
-    "Login": "Login",
- 
-    "Logout": "Logout",
-
-    "Reload page": "Reload page",
-
-    "about": "about",
-    "about page": "about page",
-    "language": "en",
-    "profile": "profile",
-    "main": "main",
-    "main page": "main page",
-    "nav": "nav",
-    "not found": "not found"
-   
-  }
+  "Login": "Login",
+  "Registration": "Registration",
+  "Logout": "Logout",
+  "Reload page": "Reload page",
+  "about": "about",
+  "about page": "about page",
+  "language": "en",
+  "profile": "profile",
+  "main": "main",
+  "main page": "main page",
+  "nav": "nav",
+  "not found": "not found"
+}

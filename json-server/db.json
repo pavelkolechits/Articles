@@ -16,5 +16,16 @@
     "email": "admin@mail.ru",
     "avatar": "https://img.freepik.com/premium-photo/man-hoodie-stands-front-computer-screen-with-green-numbers-it_927094-96.jpg?size=626&ext=jpg",
     "firstname": "byblik"
-  }
+  },
+  "test": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ]
 }

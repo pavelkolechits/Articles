@@ -1,5 +1,5 @@
 import { Dispatch } from '@reduxjs/toolkit'
-import { loginByUsername } from './loginByUsename'
+import { loginByEmail } from './loginByEmail'
 import axios from 'axios'
 import { StateSchema } from 'app/providers/StoreProvider/config/StateSchema'
 import { userActions } from 'entities/User'
@@ -17,19 +17,19 @@ describe('loginByUsername', () => {
         getState = jest.fn()
     })
 
-    test('loginByUsername', async () => {
-        const userData = { email: 'admin', id: "1" }
+    test('loginByEmail', async () => {
+        const userData = { email: 'admin', id: 1 }
         mockedAxios.post.mockReturnValue(Promise.resolve({ data: userData }))
-        const action = loginByUsername({ email: '123', password: '123' })
+        const action = loginByEmail({ email: '123', password: '123' })
 
 
         expect(mockedAxios.post).toHaveBeenCalled()
         expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userData))
     })
-    test('loginByUsername error', async () => {
+    test('loginByEmail error', async () => {
 
         mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }))
-        const action = loginByUsername({ email: '123', password: '123' })
+        const action = loginByEmail({ email: '123', password: '123' })
 
 
        

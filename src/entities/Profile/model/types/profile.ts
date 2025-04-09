@@ -1,3 +1,4 @@
+import { Axios, AxiosError } from "axios";
 import { Country } from "entities/Country";
 import { Currency } from "entities/Currency";
 
@@ -11,7 +12,7 @@ export interface Profile {
     country?: Country,
     city?: string,
     email?: string,
-    avatar?: string
+    avatar?: string | File
     firstname?: string
 }
 

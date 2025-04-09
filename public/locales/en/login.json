@@ -1,6 +1,6 @@
 {
-    "login": "login",
+    "login": "Login",
     "login form": "Login form",
-    "username": "username",
-    "password": "password"
+    "email": "Email",
+    "password": "Password"
 }

@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
-import { LoginSchema } from '../types/loginSchema'
-import { loginByUsername } from '../services/loginByUsename'
+import { RegistrationSchema } from '../types/registrationShema'
+import { registration } from '../services/registration'
 
 
 
-const initialState: LoginSchema = {
+
+const initialState: RegistrationSchema = {
     email: '',
     password: '',
     isLoading: false
 }
 
-const loginSlice = createSlice({
-    name: 'login',
+const registrationSlice = createSlice({
+    name: 'registration',
     initialState,
     reducers: {
         setUsername: (state, action: PayloadAction<string>) => {
@@ -24,24 +25,24 @@ const loginSlice = createSlice({
     extraReducers: (builder) => {
       
         builder.addCase(
-            loginByUsername.fulfilled, (state) => {
+            registration.fulfilled, (state) => {
                 state.isLoading = false
             }
         ),
         builder.addCase(
-            loginByUsername.pending, (state) => {
+            registration.pending, (state) => {
                 state.isLoading = true
                 state.error = undefined
             }
         ),
         builder.addCase(
-            loginByUsername.rejected, (state, action) => {
+            registration.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.error as string
+                state.error = action.payload
     
             }
         )
     },
 })
 
-export const { reducer: loginReducer, actions: loginActions } = loginSlice
+export const { reducer: registrationReducer, actions: registrationActions } = registrationSlice

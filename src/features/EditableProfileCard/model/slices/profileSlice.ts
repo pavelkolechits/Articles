@@ -2,6 +2,7 @@ import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
 import { Profile, ProfileSchema } from '../../../../entities/Profile/model/types/profile'
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData'
 import { updateProfileData } from '../services/updateProfileData/updateProfileData'
+import { AxiosError } from 'axios'
 
 
 
@@ -50,7 +51,7 @@ const profileSlice = createSlice({
         builder.addCase(
             fetchProfileData.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload?.message
+                state.error = action.payload 
 
             }
         ),
@@ -71,7 +72,7 @@ const profileSlice = createSlice({
         builder.addCase(
             updateProfileData.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload?.message
+                state.error = action.payload 
 
             }
         )

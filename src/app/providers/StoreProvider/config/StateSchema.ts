@@ -1,10 +1,10 @@
 import { EnhancedStore, SerializedError } from "@reduxjs/toolkit";
 import { UserSchema } from "entities/User";
-import { LoginSchema } from "features/AuthByUsername";
 import { createReducerManager } from "./reducerManager";
 import { ProfileSchema } from "entities/Profile";
-import { AxiosInstance } from "axios";
-import { AppDispatch } from "./store";
+import { AxiosError, AxiosInstance } from "axios";
+import { LoginSchema } from "features/AuthByEmail";
+import { RegistrationSchema } from "features/Registration";
 
 
 
@@ -12,7 +12,8 @@ import { AppDispatch } from "./store";
 export interface StateSchema {
     user: UserSchema;
     login?: LoginSchema;
-    profile?: ProfileSchema
+    profile?: ProfileSchema;
+    registration?: RegistrationSchema
 }
 
 export type StateSchemaKey = keyof StateSchema
@@ -29,7 +30,7 @@ export interface ThunkExtraArgs {
 }
 
 export interface ThunkConfig{
-    rejectValue: SerializedError;
+    rejectValue: string ;
     extra: ThunkExtraArgs;
-    state: StateSchema
+    state: StateSchema,
 }

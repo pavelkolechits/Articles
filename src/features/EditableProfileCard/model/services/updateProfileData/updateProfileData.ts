@@ -2,6 +2,7 @@ import { createAsyncThunk, SerializedError } from "@reduxjs/toolkit"
 import { ThunkConfig } from "app/providers/StoreProvider"
 import { Profile } from "entities/Profile"
 import { getProfileFormData } from "../../selectors/profileSelectors"
+import { AxiosError } from "axios"
 
 export const updateProfileData = createAsyncThunk<Profile, void, ThunkConfig>(
     'profile/updateProfileData',
@@ -13,13 +14,13 @@ export const updateProfileData = createAsyncThunk<Profile, void, ThunkConfig>(
             const response = await extra.api.put<Profile>('/profile', formData)
       
             if (!response.data) {
-                throw new Error()
+                throw new AxiosError()
             }
 
             return response.data
 
         } catch (error) {
-            return rejectWithValue(error as SerializedError)
+            return rejectWithValue((error as AxiosError).message )
         }
     },
 )

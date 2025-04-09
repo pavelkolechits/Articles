@@ -4,7 +4,7 @@ import { getLoginError, getLoginIsLoading, getLoginPassword, getLoginEmail } fro
 describe('loginSelectors', () => {
     const state: Partial<StateSchema> = {
         login: {
-            error: 'error',
+            // error: 'error',
             email: 'user',
             password: '123',
             isLoading: false
