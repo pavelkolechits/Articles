@@ -2,5 +2,8 @@
     "registration": "Registration",
     "registration form": "Registration form",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "invalid email": "Invalid email",
+    "invalid password": "Invalid password"
+
 }

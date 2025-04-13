@@ -3,6 +3,7 @@ import { Profile, ProfileSchema } from '../../../../entities/Profile/model/types
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData'
 import { updateProfileData } from '../services/updateProfileData/updateProfileData'
 import { AxiosError } from 'axios'
+import { updateAvatar } from '../services/updateAvatar/updateAvatar'
 
 
 
@@ -71,6 +72,24 @@ const profileSlice = createSlice({
         ),
         builder.addCase(
             updateProfileData.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload 
+
+            }
+        ),
+        builder.addCase(
+            updateAvatar.fulfilled, (state) => {
+                state.isLoading = false
+            }
+        ),
+        builder.addCase(
+            updateAvatar.pending, (state) => {
+                state.isLoading = true
+                state.error = undefined
+            }
+        ),
+        builder.addCase(
+            updateAvatar.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.payload 
 

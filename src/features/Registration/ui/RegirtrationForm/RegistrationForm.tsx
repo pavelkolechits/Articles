@@ -14,6 +14,8 @@ import {
     getRegistrationEmail,
     getRegistrationError,
     getRegistrationIsLoading,
+    getRegistrationIsvalidEmail,
+    getRegistrationIsvalidPassword,
     getRegistrationPassword
 } from '../../model/selectors/registrationSelectors'
 
@@ -26,18 +28,20 @@ const dynamicReducersProps: UseDynamicReducersProps = { reducers: { registration
 const RegistrationForm = memo((props: RegistrationFormProps) => {
 
     const { className } = props
-    const { t } = useTranslation('registation')
+    const { t } = useTranslation('registration')
     const dispatch = useAppDispatch()
     const email = useSelector(getRegistrationEmail)
     const password = useSelector(getRegistrationPassword)
     const isLoading = useSelector(getRegistrationIsLoading)
     const error = useSelector(getRegistrationError)
-
+    const isValidEmail = useSelector(getRegistrationIsvalidEmail)
+    const isValidPassword = useSelector(getRegistrationIsvalidPassword)
+    console.log(isValidEmail, isValidPassword)
 
     useDynamicReducers(dynamicReducersProps)
 
     const onChangeUsername = useCallback((value: string) => {
-        dispatch(registrationActions.setUsername(value))
+        dispatch(registrationActions.setEmail(value))
     }, [dispatch])
 
     const onChangePassword = useCallback((value: string) => {
@@ -51,7 +55,9 @@ const RegistrationForm = memo((props: RegistrationFormProps) => {
     return (
         <div className={classNames(cls.RegistrationForm, {}, [className])}>
             <Text align='center' title={t('registration form')} />
-            {error && <Text theme='error' text={error}/>}
+            {!isValidEmail && <Text theme='error' text={t('invalid email')} />}
+            {!isValidPassword && <Text theme='error' text={t('invalid password')} />}
+            {error && <Text theme='error' text={error} />}
             <div className={cls.inputWrap}>
                 <Input
                     textAlign='start'
@@ -69,7 +75,10 @@ const RegistrationForm = memo((props: RegistrationFormProps) => {
                     type="password" />
             </div>
             <div className={cls.buttonWrap}>
-                <Button disabled={isLoading} onClick={onRegistration} theme='outline'>{t('registration')}</Button>
+                <Button
+                    disabled={isLoading || !isValidEmail || !isValidPassword}
+                    onClick={onRegistration}
+                    theme='outline'>{t('registration')}</Button>
             </div>
         </div>
     )

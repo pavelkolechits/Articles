@@ -2,6 +2,7 @@ import { AsyncThunkOptions, createAsyncThunk, SerializedError } from '@reduxjs/t
 import { ThunkConfig, ThunkExtraArgs } from 'app/providers/StoreProvider';
 import { AxiosError } from 'axios';
 import { User, userActions } from 'entities/User'
+import { ResponseAuthData } from 'entities/User/model/types/UserSchema';
 import { LOCAL_STORAGE_USER_KEY } from 'shared/consts/localStorage';
 import { axiosErrorHandler } from 'shared/helpers/axiosErrorHandler/axiosErrorHandler';
 
@@ -13,7 +14,7 @@ interface RegistrationProps {
 
 
 export const registration = createAsyncThunk<
-    User,
+    ResponseAuthData,
     RegistrationProps,
     ThunkConfig
 >(
@@ -22,14 +23,14 @@ export const registration = createAsyncThunk<
         const { rejectWithValue, dispatch, extra } = thunkAPI
 
         try {
-            const response = await extra.api.post<User>('/auth/registration', { email, password })
+            const response = await extra.api.post<ResponseAuthData>('/auth/registration', { email, password },)
 
             if (!response.data) {
                 throw new AxiosError()
             }
 
-            // localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(response.data))
-            // dispatch(userActions.setAuthData(response.data))
+            localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(response.data))
+            dispatch(userActions.setAuthData(response.data))
             return response.data
 
         } catch (error) {

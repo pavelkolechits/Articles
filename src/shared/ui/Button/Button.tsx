@@ -2,7 +2,7 @@ import { classNames } from 'shared/helpers/classNames/classNames'
 import cls from './Button.module.scss'
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react'
 
-type ThemeButton = 'clear' | 'outline' | 'background' | 'inverted-background'
+type ThemeButton = 'clear' | 'outline' | 'background' | 'inverted-background'| 'outline-success'| 'outline-error'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string,

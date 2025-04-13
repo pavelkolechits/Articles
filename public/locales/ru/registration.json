@@ -2,5 +2,7 @@
     "registration": "Зарегистрироваться",
     "registration form": "Форма регистрации",
     "email": "Email",
-    "password": "Пароль"
+    "password": "Пароль",
+    "invalid email": "Невалидный email",
+    "invalid password": "Невалидный пароль"
 }

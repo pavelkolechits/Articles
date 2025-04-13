@@ -1,7 +1,15 @@
 {
-    "profile": "profile",
+    "email": "Email",
     "Profile": "Профиль",
     "edit": "Редактировать",
     "firstname": "Имя",
-    "lastname": "Фамилия"
+    "lastname": "Фамилия",
+    "save": "Сохранить",
+    "cancel": "Отменить",
+    "age": "Возраст",
+    "city": "Город",
+    "currency": "Валюта",
+    "avatar": "Аватар",
+    "country": "Страна"
+    
 }

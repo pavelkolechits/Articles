@@ -4,7 +4,7 @@ import cls from './LoginForm.module.scss'
 import { Button } from 'shared/ui/Button/Button'
 import { Input } from 'shared/ui/Input/Input'
 import { useSelector } from 'react-redux'
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { loginActions, loginReducer } from '../../model/slices/loginSlice'
 import {
     getLoginEmail,
@@ -16,6 +16,7 @@ import { loginByEmail } from '../../model/services/loginByEmail'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { Text } from 'shared/ui/Text/Text'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
+import { validateEmail } from 'shared/helpers/validators/emailValidator/emailValidator'
 
 
 interface LoginFormProps {
@@ -35,8 +36,8 @@ const LoginForm = memo((props: LoginFormProps) => {
 
     useDynamicReducers(dynamicReducersProps)
 
-    const onChangeUsername = useCallback((value: string) => {
-        dispatch(loginActions.setUsername(value))
+    const onChangeEmail = useCallback((value: string) => {
+        dispatch(loginActions.setEmail(value))
     }, [dispatch])
 
     const onChangePassword = useCallback((value: string) => {
@@ -45,17 +46,17 @@ const LoginForm = memo((props: LoginFormProps) => {
 
     const onLogin = useCallback(() => {
         dispatch(loginByEmail({ email, password }))
-    }, [dispatch, password, email])
+    }, [email, dispatch, password])
 
     return (
         <div className={classNames(cls.LoginForm, {}, [className])}>
             <Text align='center' title={t('login form')} />
-            {error && <Text theme='error' text={error}/>}
+            {error && <Text theme='error' text={error} />}
             <div className={cls.inputWrap}>
                 <Input
                     textAlign='start'
                     value={email}
-                    onChange={onChangeUsername}
+                    onChange={onChangeEmail}
                     max
                     text={t('email')}
                     type="text" />

@@ -1,7 +1,15 @@
 {
-     "profile": "profile",
      "Profile": "Profile",
      "edit": "Edit",
-     "firstname": "firstname",
-     "lastname": "lastname"
+     "firstname": "Firstname",
+     "lastname": "Lastname",
+     "age": "Age",
+     "city": "Sity",
+     "currency": "Currency",
+     "avatar": "Avatar",
+     "country": "Country",
+     "email": "Email",
+     "save": "Save",
+     "cancel": "Cancel"
+
 }

@@ -4,5 +4,7 @@ export interface RegistrationSchema {
     email: string;
     password: string;
     error?: string  ;
-    isLoading: boolean
+    isLoading: boolean;
+    isValidEmail?:boolean;
+    isValidPassword?: boolean;
 }

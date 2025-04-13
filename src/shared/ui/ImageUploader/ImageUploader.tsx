@@ -1,0 +1,40 @@
+import { classNames } from 'shared/helpers/classNames/classNames'
+import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
+import { createReadStream } from 'node:fs'
+import cls from './ImageUploader.module.scss'
+
+interface ImageUploaderProps {
+    className?: string;
+    onLoadFile?: (file: FormData) => void
+}
+
+export const ImageUploader = (props: ImageUploaderProps) => {
+
+    const { className, onLoadFile } = props
+    const { t } = useTranslation()
+    const [file, setFile] = useState<File | null>(null)
+
+    const onChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setFile(e.target.files[0])
+        }
+    }
+    useEffect(() => {
+        
+        if (!file) {
+            return
+        }
+        const formData = new FormData()
+        formData.append('image', file)
+
+        onLoadFile?.(formData)
+    }, [file, onLoadFile])
+
+    return (
+        <div className={classNames(cls.ImageUploader, {}, [className])}>
+            {!file && <label >{t('Choose file to upload')}</label>}
+            <input type="file" onChange={onChangeHandler} />
+        </div>
+    )
+}

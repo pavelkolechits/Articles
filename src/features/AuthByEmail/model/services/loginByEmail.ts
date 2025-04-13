@@ -1,7 +1,8 @@
-import { AsyncThunkOptions, createAsyncThunk, SerializedError } from '@reduxjs/toolkit'
-import { ThunkConfig, ThunkExtraArgs } from 'app/providers/StoreProvider';
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { ThunkConfig } from 'app/providers/StoreProvider';
 import { AxiosError } from 'axios';
-import { User, userActions } from 'entities/User'
+import { userActions } from 'entities/User';
+import { ResponseAuthData } from 'entities/User/model/types/UserSchema';
 import { LOCAL_STORAGE_USER_KEY } from 'shared/consts/localStorage';
 import { axiosErrorHandler } from 'shared/helpers/axiosErrorHandler/axiosErrorHandler';
 
@@ -13,7 +14,7 @@ interface LoginByEmailProps {
 
 
 export const loginByEmail = createAsyncThunk<
-    User,
+    ResponseAuthData,
     LoginByEmailProps,
     ThunkConfig
 >(
@@ -22,7 +23,7 @@ export const loginByEmail = createAsyncThunk<
         const { rejectWithValue, dispatch, extra } = thunkAPI
 
         try {
-            const response = await extra.api.post<User>('/auth/login', { email, password })
+            const response = await extra.api.post<ResponseAuthData>('/auth/login', { email, password })
 
             if (!response.data) {
                 throw new AxiosError()

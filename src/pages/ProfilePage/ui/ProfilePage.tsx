@@ -4,28 +4,31 @@ import cls from './ProfilePage.module.scss'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
 import { memo, useEffect } from 'react'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
-import { EditableProfileCard, fetchProfileData, profileReducer } from 'features/EditableProfileCard'
+import { EditableProfileCard, profileReducer } from 'features/EditableProfileCard'
+import { useLocation, useParams } from 'react-router-dom'
+import { Text } from 'shared/ui/Text/Text'
 
 interface ProfilePageProps {
     className?: string
 }
-const dynamicReducersProps: UseDynamicReducersProps = { reducers: { profile: profileReducer }, removeAfterAnmount: false }
+const dynamicReducersProps: UseDynamicReducersProps = {
+    reducers: { profile: profileReducer },
+    removeAfterAnmount: false
+}
 
 const ProfilePage = (props: ProfilePageProps) => {
-
+    useDynamicReducers(dynamicReducersProps)
     const { className } = props
     const { t } = useTranslation('profile')
-    const dispatch = useAppDispatch()
+    const {id} = useParams<{id: string}>()
 
-    useEffect(() => {
-        dispatch(fetchProfileData())
-    }, [dispatch])
-
-    useDynamicReducers(dynamicReducersProps)
+    if(!id) {
+        return <Text text={t('Профиль не найден')} />;
+    }
 
     return (
         <div className={classNames(cls.ProfilePage, {}, [className])}>
-            <EditableProfileCard />
+            <EditableProfileCard id={id}/>
         </div>
     )
 }

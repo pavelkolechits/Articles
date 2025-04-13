@@ -9,12 +9,13 @@ import { profileActions } from '../../model/slices/profileSlice'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData'
 interface EditableProfileCardHeaderProps {
-    className?: string
+    className?: string;
+    id: string
 }
 
 export const EditableProfileCardHeader = (props: EditableProfileCardHeaderProps) => {
 
-    const { className } = props
+    const { className, id } = props
     const { t } = useTranslation('profile')
     const readonly = useSelector(getProfileReadonly)
     const dispatch = useAppDispatch()
@@ -28,7 +29,7 @@ export const EditableProfileCardHeader = (props: EditableProfileCardHeaderProps)
         dispatch(profileActions.cancelEdit())
     }
     const onUpdateData = () => {
-        dispatch(updateProfileData())
+        dispatch(updateProfileData(id))
     }
 
     return (
@@ -39,8 +40,17 @@ export const EditableProfileCardHeader = (props: EditableProfileCardHeaderProps)
                     <Button onClick={onEdit} theme='outline'>{t('edit')}</Button>
                     :
                     <div className={cls.wrapBtn}>
-                        <Button onClick={onUpdateData} theme='outline'>{t('save')}</Button>
-                        <Button className={cls.cancelBtn} onClick={onCancel} theme='outline'>{t('cancel')}</Button>
+                        <Button
+                            onClick={onUpdateData}
+                            theme='outline-success'>
+                            {t('save')}
+                        </Button>
+                        <Button
+                            className={cls.cancelBtn}
+                            onClick={onCancel}
+                            theme='outline-error'>
+                            {t('cancel')}
+                        </Button>
                     </div>
             }
 

@@ -12,7 +12,7 @@ export interface Profile {
     country?: Country,
     city?: string,
     email?: string,
-    avatar?: string | File
+    avatar?: string ,
     firstname?: string
 }
 

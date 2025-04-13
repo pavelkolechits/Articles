@@ -10,7 +10,7 @@ export interface SelectOptions {
     value: string
 }
 
-type TextAlign = 'center' | 'start' | 'end'
+export type TextAlign = 'center' | 'start' | 'end'
 
 interface SelectProps {
     className?: string;

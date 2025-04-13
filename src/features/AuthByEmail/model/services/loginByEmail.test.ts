@@ -24,7 +24,7 @@ describe('loginByUsername', () => {
 
 
         expect(mockedAxios.post).toHaveBeenCalled()
-        expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userData))
+        expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData({ user: userData, token: "" }))
     })
     test('loginByEmail error', async () => {
 
@@ -32,7 +32,7 @@ describe('loginByUsername', () => {
         const action = loginByEmail({ email: '123', password: '123' })
 
 
-       
+
         expect(dispatch).toHaveBeenCalledTimes(2)
     })
 

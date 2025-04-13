@@ -34,3 +34,13 @@
     opacity: 0.5;
     cursor: default;
 }
+
+.outline-success{
+    color: var(--success-light);
+    border: 1px solid var(--success-light);
+}
+
+.outline-error{
+    color: var(--red-light);
+    border: 1px solid var(--red-light);
+}

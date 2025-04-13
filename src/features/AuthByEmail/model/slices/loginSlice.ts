@@ -2,6 +2,7 @@ import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
 import { LoginSchema } from '../types/loginSchema'
 import { loginByEmail } from '../services/loginByEmail'
 import { AxiosError } from 'axios'
+import { validateEmail } from 'shared/helpers/validators/emailValidator/emailValidator'
 
 
 
@@ -17,7 +18,7 @@ const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-        setUsername: (state, action: PayloadAction<string>) => {
+        setEmail: (state, action: PayloadAction<string>) => {
             state.email = action.payload
         },
         setPassword: (state, action: PayloadAction<string>) => {

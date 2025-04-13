@@ -5,11 +5,15 @@ import { Select, SelectOptions } from 'shared/ui/Select/Select'
 import { Currency } from '../model/types/currency'
 import { memo, useCallback } from 'react'
 
+type TextAlign = 'center' | 'start' | 'end'
+
+
 interface CurrencySelectProps {
     className?: string;
     onChange?: (value: Currency) => void;
     value?: Currency;
-    readonly?: boolean
+    readonly?: boolean;
+    textAlign?: TextAlign
 
 }
 
@@ -21,12 +25,18 @@ const options: SelectOptions[] = [
 
 export const CurrencySelect = memo((props: CurrencySelectProps) => {
 
-    const { className, onChange, value, readonly } = props
-    const { t } = useTranslation()
+    const { className, onChange, value, readonly, textAlign } = props
+    const { t } = useTranslation('profile')
 
     const onChangeCurency = useCallback((value: string) => {
         onChange?.(value as Currency)
     }, [onChange])
 
-    return <Select readonly={readonly} value={value} onChange={onChangeCurency} label='Currency' options={options} />
+    return <Select
+        textAlign={textAlign}
+        readonly={readonly}
+        value={value}
+        onChange={onChangeCurency}
+        label={t('currency')}
+        options={options} />
 })

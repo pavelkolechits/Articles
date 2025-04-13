@@ -1,11 +1,21 @@
 .ProfileCard {
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     padding: 10px;
+
+    &.readonly {
+        border: 2px solid var(--primary-color);
+    }
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     margin: 5px;
+}
+
+.avatar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 

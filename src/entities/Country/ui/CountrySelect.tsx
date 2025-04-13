@@ -5,11 +5,15 @@ import { Select, SelectOptions } from 'shared/ui/Select/Select'
 import { Country } from '../model/types/country'
 import { memo, useCallback } from 'react'
 
+
+type TextAlign = 'start' | 'center' | 'end'
+
 interface CountrySelectProps {
     className?: string;
     onChange?: (value: Country) => void;
     value?: Country;
     readonly?: boolean
+    textAlign?: TextAlign
 }
 
 const options: SelectOptions[] = [
@@ -22,13 +26,19 @@ const options: SelectOptions[] = [
 
 export const CountrySelect = memo((props: CountrySelectProps) => {
 
-    const { className, onChange, value, readonly } = props
-    const { t } = useTranslation()
+    const { className, onChange, value, readonly, textAlign } = props
+    const { t } = useTranslation('profile')
 
     const onChangeCountry = useCallback((value: string) => {
         onChange?.(value as Country)
     }, [onChange])
 
-    return <Select readonly={readonly} value={value} onChange={onChangeCountry} label="Country" options={options} />
+    return <Select
+        textAlign={textAlign}
+        readonly={readonly}
+        value={value}
+        onChange={onChangeCountry}
+        label={t('country')}
+        options={options} />
 
 })
