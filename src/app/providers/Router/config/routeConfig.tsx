@@ -13,8 +13,12 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.NOT_FOUND]: '*'
 }
 
+export type  AppRouteProps  = RouteProps & {
+    authOnly?: boolean
+}
 
-export const routeConfig: Record<AppRoutes, RouteProps> = {
+
+export const routeConfig: Record<AppRoutes, AppRouteProps> = {
     [AppRoutes.MAIN]: {
         path: getRouteMain(),
         element: <MainPage/>
@@ -29,7 +33,8 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     },
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(':id') ,
-        element: <ProfilePage/>
+        element: <ProfilePage/>,
+        authOnly: true
     }
 
 }
