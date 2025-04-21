@@ -1,8 +1,8 @@
 import { classNames } from 'shared/helpers/classNames/classNames'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import { createReadStream } from 'node:fs'
 import cls from './ImageUploader.module.scss'
+import { fileURLToPath, URL } from 'url';
 
 interface ImageUploaderProps {
     className?: string;
@@ -20,15 +20,23 @@ export const ImageUploader = (props: ImageUploaderProps) => {
             setFile(e.target.files[0])
         }
     }
+
+ 
+
+    
+    
+
     useEffect(() => {
-        
+
         if (!file) {
             return
         }
+        
         const formData = new FormData()
         formData.append('image', file)
-
+        console.log(file)
         onLoadFile?.(formData)
+
     }, [file, onLoadFile])
 
     return (

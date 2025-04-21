@@ -12,7 +12,8 @@ export const fetchProfileData = createAsyncThunk<Profile, string, ThunkConfig>(
     'profile/fetchProfileData',
     async (id, thunkAPI) => {
         const { rejectWithValue, extra, getState } = thunkAPI
-        const token = getUserAuthData(getState())?.token
+        const userAuthData = getUserAuthData(getState())
+        const token = userAuthData?.token
        
         try {
             const response = await extra.api.get<Profile>(`/profile/${id}`, {
@@ -25,7 +26,7 @@ export const fetchProfileData = createAsyncThunk<Profile, string, ThunkConfig>(
                 throw new AxiosError()
             }
 
-            return response.data
+            return {...response.data, avatar: 'http://localhost:7000/' + response.data.avatar}
 
         } catch (error) {
             return rejectWithValue((error as AxiosError).message)

@@ -8,14 +8,16 @@ import { getProfileReadonly } from '../../model/selectors/profileSelectors'
 import { profileActions } from '../../model/slices/profileSlice'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData'
+
 interface EditableProfileCardHeaderProps {
     className?: string;
-    id: string
+    id: string;
+    imageFormData: FormData | null
 }
 
 export const EditableProfileCardHeader = (props: EditableProfileCardHeaderProps) => {
 
-    const { className, id } = props
+    const { className, id , imageFormData} = props
     const { t } = useTranslation('profile')
     const readonly = useSelector(getProfileReadonly)
     const dispatch = useAppDispatch()
@@ -29,7 +31,7 @@ export const EditableProfileCardHeader = (props: EditableProfileCardHeaderProps)
         dispatch(profileActions.cancelEdit())
     }
     const onUpdateData = () => {
-        dispatch(updateProfileData(id))
+        dispatch(updateProfileData(imageFormData))
     }
 
     return (
@@ -53,7 +55,6 @@ export const EditableProfileCardHeader = (props: EditableProfileCardHeaderProps)
                         </Button>
                     </div>
             }
-
         </div>
     )
 }

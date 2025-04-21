@@ -8,6 +8,7 @@ import { Country, CountrySelect } from 'entities/Country'
 import { Profile } from '../../model/types/profile'
 import { Avatar } from 'shared/ui/Avatar/Avatar'
 import { ImageUploader } from 'shared/ui/ImageUploader/ImageUploader'
+import AvatarAlt from 'shared/assets/icons/ava.svg'
 
 
 interface ProfileCardProps {
@@ -46,7 +47,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
     return (
         <div className={classNames(cls.ProfileCard, { [cls.readonly]: readonly }, [className])}>
             <div className={cls.avatar}>
-                <Avatar src={profileData?.avatar}/>
+                <Avatar  src={profileData?.avatar}/>
                 {!readonly && <ImageUploader onLoadFile={onChangeAvatar}/>}
             </div>
             <div className={cls.profileData}>
@@ -56,34 +57,34 @@ export const ProfileCard = (props: ProfileCardProps) => {
                     onChange={onChangeFirstname}
                     text={t('firstname')}
                     textAlign='start'
-                    value={profileData?.firstname} />
+                    value={profileData?.firstname || ''} />
                 <Input
                     readonly={readonly}
                     onChange={onChangeLastname}
                     text={t('lastname')}
                     textAlign='start'
-                    value={profileData?.lastname} />
+                    value={profileData?.lastname || ''} />
                 <Input
                     readonly={readonly}
                     type='email'
                     text={t('email')}
                     textAlign='start'
-                    value={profileData?.email} />
+                    value={profileData?.email || ''} />
                 <Input
                     readonly={readonly}
                     onChange={onChangeAge}
                     type='number' text={t('age')}
                     textAlign='start'
-                    value={profileData?.age} />
+                    value={profileData?.age || ''} />
                 <Input
                     readonly={readonly}
                     onChange={onChangeCity}
                     text={t('city')}
                     textAlign='start'
-                    value={profileData?.city} />
+                    value={profileData?.city || ''} />
                 <CurrencySelect
                     readonly={readonly}
-                    value={profileData?.currency}
+                    value={profileData?.currency }
                     textAlign='start'
                     onChange={onChangeCurency} />
                 <CountrySelect

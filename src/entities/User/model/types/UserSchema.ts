@@ -16,4 +16,5 @@ export interface ResponseAuthData {
 
 export interface UserSchema {
     authData?: ResponseAuthData
+    inited?: boolean
 }

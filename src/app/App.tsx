@@ -8,6 +8,9 @@ import { ErrorBoundary } from "react-error-boundary"
 import { PageErrorFallback } from "widgets/PageErrorFallback"
 import { useAppDispatch } from "shared/hoocs/useAppDispatch/useAppDispatch"
 import { userActions } from "entities/User"
+import { getUserInited } from "entities/User/model/selectors/userSelectors"
+import { useSelector } from "react-redux"
+import { Loader } from "shared/ui/Loader/loader/Loader"
 
 
 
@@ -15,11 +18,14 @@ import { userActions } from "entities/User"
 
 export const App = () => {
     const dispatch = useAppDispatch()
+    const inited = useSelector(getUserInited);
 
     useEffect(() => {
         dispatch(userActions.initAuthData())
     },[dispatch])
-    
+    if (!inited) {
+        <Loader /> 
+    }
     return (
         <div className='app'>
             <ErrorBoundary fallback={<PageErrorFallback />}>

@@ -5,18 +5,33 @@ import { getProfileFormData } from "../../selectors/profileSelectors"
 import { AxiosError } from "axios"
 import { getUserAuthData } from "entities/User"
 
-export const updateProfileData = createAsyncThunk<Profile, string, ThunkConfig>(
+export const updateProfileData = createAsyncThunk<Profile, FormData | null, ThunkConfig>(
     'profile/updateProfileData',
-    async (id, thunkAPI) => {
+    async (formData, thunkAPI) => {
         const { rejectWithValue, extra, getState } = thunkAPI
-        const user = getUserAuthData(getState())
-        const token = user?.token
-        const formData = getProfileFormData(getState())
+        const userAuthData = getUserAuthData(getState())
+        const id = userAuthData?.user.id
+        const token = userAuthData?.token
+        const profileData = getProfileFormData(getState())
+        let updateProfileData 
+
+        if (formData) {
+            formData.append('age', profileData?.age ?? '')
+            formData.append('firstname', profileData?.firstname ?? '')
+            formData.append('lastname', profileData?.lastname ?? '')
+            formData.append('sity', profileData?.city ?? '')
+            formData.append('currency', profileData?.currency ?? '')
+            formData.append('country', profileData?.country ?? '')
+            updateProfileData = formData
+        } else {
+            updateProfileData = {...profileData, avatar: '' }
+        }
+      
 
         try {
             const response = await extra.api.put<Profile>(
                 `/profile/${id}`,
-                formData,
+                updateProfileData,
                 {
                     headers: {
                         Authorization: 'Bearer ' + token,
@@ -28,7 +43,7 @@ export const updateProfileData = createAsyncThunk<Profile, string, ThunkConfig>(
                 throw new AxiosError()
             }
 
-            return response.data
+            return {...response.data, avatar: 'http://localhost:7000/' + response.data.avatar}
 
         } catch (error) {
             return rejectWithValue((error as AxiosError).message)

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import cls from './EditableProfileCard.module.scss'
 import { ProfileCard } from 'entities/Profile'
 import { EditableProfileCardHeader } from '../EditableProfileCardHeader/EditableProfileCardHeader'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { profileActions } from '../../model/slices/profileSlice'
 import { useSelector } from 'react-redux'
@@ -13,7 +13,7 @@ import { Currency } from 'entities/Currency'
 import { Loader } from 'shared/ui/Loader/loader/Loader'
 import { PageLoader } from 'shared/ui/Loader/PageLoader/PageLoader'
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData'
-import { updateAvatar } from '../../model/services/updateAvatar/updateAvatar'
+
 
 interface EditableProfileCardProps {
     className?: string;
@@ -28,11 +28,12 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
     const formData = useSelector(getProfileFormData)
     const readonly = useSelector(getProfileReadonly)
     const isLoading = useSelector(getProfileIsLoading)
+    const [avatar, setAvatar] = useState<FormData | null>(null)
 
     useEffect(() => {
-        if (id) {
-            dispatch(fetchProfileData(id));
-        }
+    
+        dispatch(fetchProfileData(id));
+        
     }, [dispatch, id]);
 
     const onChangeFirstname = useCallback((value: string) => {
@@ -52,19 +53,19 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
     }, [dispatch])
 
     const onChangeCountry = useCallback((country: Country) => {
-        dispatch(profileActions.updateProfile({ country }))
+        dispatch(profileActions.updateProfile({ country: country || Country.Belarus }))
     }, [dispatch])
 
     const onChangeCurrency = useCallback((currency: Currency) => {
-        dispatch(profileActions.updateProfile({ currency }))
+        dispatch(profileActions.updateProfile({ currency: currency || Currency.EUR }))
     }, [dispatch])
     const onChangeAvatar = useCallback((file: FormData) => {
-        dispatch(updateAvatar({ id, file }))
-    }, [dispatch, id])
+        setAvatar(file)
+    }, [])
 
     return (
         <div className={classNames(cls.EditableProfileCard, {}, [className])}>
-            <EditableProfileCardHeader id={id} />
+            <EditableProfileCardHeader imageFormData={avatar} id={id} />
             {isLoading ?
                 <Loader /> :
                 <ProfileCard

@@ -3,13 +3,8 @@ import { MainPage } from "pages/MainPage"
 import { NotFoundPage } from "pages/NotFoundPage"
 import { ProfilePage } from "pages/ProfilePage"
 import { RouteProps } from "react-router-dom"
+import { AppRoutes, getRouteAbout, getRouteMain, getRouteNotFound, getRouteProfile } from "shared/consts/router"
 
-export enum AppRoutes {
-    MAIN = 'main',
-    ABOUT = 'about',
-    NOT_FOUND = 'not_found',
-    PROFILE = 'profile'
-}
 
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
@@ -21,19 +16,19 @@ export const RoutePath: Record<AppRoutes, string> = {
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
     [AppRoutes.MAIN]: {
-        path: RoutePath.main,
+        path: getRouteMain(),
         element: <MainPage/>
     },
     [AppRoutes.ABOUT]: {
-        path: RoutePath.about,
+        path: getRouteAbout(),
         element: <AboutPage/>
     },
     [AppRoutes.NOT_FOUND]: {
-        path: RoutePath.not_found,
+        path: getRouteNotFound(),
         element: <NotFoundPage/>
     },
     [AppRoutes.PROFILE]: {
-        path: RoutePath.profile + ':id' ,
+        path: getRouteProfile(':id') ,
         element: <ProfilePage/>
     }
 

@@ -2,10 +2,6 @@ import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
 import { Profile, ProfileSchema } from '../../../../entities/Profile/model/types/profile'
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData'
 import { updateProfileData } from '../services/updateProfileData/updateProfileData'
-import { AxiosError } from 'axios'
-import { updateAvatar } from '../services/updateAvatar/updateAvatar'
-
-
 
 
 const initialState: ProfileSchema = {
@@ -32,7 +28,7 @@ const profileSlice = createSlice({
             state.readonly = true;
             state.formData = state.data;
         },
-    
+
     },
     extraReducers: (builder) => {
 
@@ -52,7 +48,7 @@ const profileSlice = createSlice({
         builder.addCase(
             fetchProfileData.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload 
+                state.error = action.payload
 
             }
         ),
@@ -73,28 +69,11 @@ const profileSlice = createSlice({
         builder.addCase(
             updateProfileData.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload 
-
-            }
-        ),
-        builder.addCase(
-            updateAvatar.fulfilled, (state) => {
-                state.isLoading = false
-            }
-        ),
-        builder.addCase(
-            updateAvatar.pending, (state) => {
-                state.isLoading = true
-                state.error = undefined
-            }
-        ),
-        builder.addCase(
-            updateAvatar.rejected, (state, action) => {
-                state.isLoading = false
-                state.error = action.payload 
+                state.error = action.payload
 
             }
         )
+
     },
 })
 
