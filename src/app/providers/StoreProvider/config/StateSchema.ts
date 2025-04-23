@@ -6,6 +6,7 @@ import { AxiosInstance } from "axios";
 import { LoginSchema } from "features/AuthByEmail";
 import { RegistrationSchema } from "features/Registration";
 import { ArticleSchema } from "entities/Article";
+import { ArticleCommentsSchema } from "pages/ArticlePage/model/types/ArticleCommentsSchema";
 
 
 
@@ -15,7 +16,8 @@ export interface StateSchema {
     login?: LoginSchema;
     profile?: ProfileSchema;
     registration?: RegistrationSchema,
-    article?: ArticleSchema
+    article?: ArticleSchema;
+    articleComments?: ArticleCommentsSchema
 }
 
 export type StateSchemaKey = keyof StateSchema
@@ -32,7 +34,7 @@ export interface ThunkExtraArgs {
 }
 
 export interface ThunkConfig{
-    rejectValue: string ;
+    rejectValue: string;
     extra: ThunkExtraArgs;
     state: StateSchema,
 }
