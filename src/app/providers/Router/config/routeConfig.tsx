@@ -1,6 +1,7 @@
 import { AboutPage } from "pages/AboutPage"
 import { ArticleListPage } from "pages/ArticleListPage"
 import { ArticlePage } from "pages/ArticlePage"
+import { CreateArticlePage } from "pages/CreateArticlePage"
 import { MainPage } from "pages/MainPage"
 import { NotFoundPage } from "pages/NotFoundPage"
 import { ProfilePage } from "pages/ProfilePage"
@@ -10,6 +11,7 @@ import {
     getRouteAbout,
     getRouteArticle,
     getRouteArticleList,
+    getRouteCreateArticle,
     getRouteMain,
     getRouteNotFound,
     getRouteProfile
@@ -48,6 +50,12 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
         path: getRouteArticle(':id'),
         element: <ArticlePage />,
         authOnly: true
+    },
+    [AppRoutes.CREATE_ARTICLE]: {
+        path: getRouteCreateArticle(),
+        element: <CreateArticlePage />,
+        authOnly: true
     }
+
 
 }

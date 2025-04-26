@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ArticleSchema } from '../types/articleSchema'
 import { fetchArticleById } from '../services/fetchArticleById'
-import { Article } from '../types/article'
+import { IArticle } from '../types/article'
 
 
 
@@ -19,7 +19,7 @@ const articleSlice = createSlice({
     extraReducers: (builder) => {
 
         builder.addCase(
-            fetchArticleById.fulfilled, (state, action: PayloadAction<Article>) => {
+            fetchArticleById.fulfilled, (state, action: PayloadAction<IArticle>) => {
                 state.isLoading = false
                 state.data = action.payload
             }

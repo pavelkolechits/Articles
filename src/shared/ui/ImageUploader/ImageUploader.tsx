@@ -6,12 +6,13 @@ import { fileURLToPath, URL } from 'url';
 
 interface ImageUploaderProps {
     className?: string;
-    onLoadFile?: (file: FormData) => void
+    onLoadFile?: (file: FormData) => void;
+    readonly?: boolean
 }
 
 export const ImageUploader = (props: ImageUploaderProps) => {
 
-    const { className, onLoadFile } = props
+    const { className, onLoadFile, readonly } = props
     const { t } = useTranslation()
     const [file, setFile] = useState<File | null>(null)
 
@@ -20,11 +21,6 @@ export const ImageUploader = (props: ImageUploaderProps) => {
             setFile(e.target.files[0])
         }
     }
-
- 
-
-    
-    
 
     useEffect(() => {
 
@@ -42,7 +38,7 @@ export const ImageUploader = (props: ImageUploaderProps) => {
     return (
         <div className={classNames(cls.ImageUploader, {}, [className])}>
             {!file && <label >{t('Choose file to upload')}</label>}
-            <input type="file" onChange={onChangeHandler} />
+            <input disabled={readonly} type="file" onChange={onChangeHandler} />
         </div>
     )
 }

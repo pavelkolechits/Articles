@@ -21,9 +21,9 @@ export const ArticleTextBlockComponent = ({ className, block }: ArticleTextBlock
                     className={cls.title}
                 />
             )}
-            {block.paragraphs.map((paragraph) => (
+            {block.paragraphs.map((paragraph, index) => (
                 <Text
-                    key={paragraph}
+                    key={index}
                     text={paragraph}
                     className={cls.paragraph}
                 />

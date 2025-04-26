@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { Article } from "../types/article"
+import { IArticle } from "../types/article"
 import { axiosErrorHandler } from "shared/helpers/axiosErrorHandler/axiosErrorHandler"
 import { ThunkConfig } from "app/providers/StoreProvider"
 import axios from "axios"
@@ -10,7 +10,7 @@ import axios from "axios"
 
 
 export const fetchArticleById = createAsyncThunk<
-    Article,
+    IArticle,
     string,
     ThunkConfig
 >(
@@ -19,7 +19,7 @@ export const fetchArticleById = createAsyncThunk<
         const { rejectWithValue, extra } = thunkAPI
 
         try {
-            const response = await axios.get<Article>(`http://localhost:8000/articles/${id}`)
+            const response = await axios.get<IArticle>(`http://localhost:8000/articles/${id}`)
 
             return response.data
 

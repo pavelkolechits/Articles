@@ -7,6 +7,7 @@ import { LoginSchema } from "features/AuthByEmail";
 import { RegistrationSchema } from "features/Registration";
 import { ArticleSchema } from "entities/Article";
 import { ArticleCommentsSchema } from "pages/ArticlePage/model/types/ArticleCommentsSchema";
+import { CreateArticleSchema } from "features/CreateArticleCard/model/types/createArticleSchema";
 
 
 
@@ -17,7 +18,8 @@ export interface StateSchema {
     profile?: ProfileSchema;
     registration?: RegistrationSchema,
     article?: ArticleSchema;
-    articleComments?: ArticleCommentsSchema
+    articleComments?: ArticleCommentsSchema,
+    createArticle?: CreateArticleSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

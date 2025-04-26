@@ -1,3 +1,10 @@
+.ArticleTextBlockComponent {
+    word-break: keep-all;
+    white-space: pre-wrap;       
+    word-wrap: break-word;
+}
+
+
 .title {
     margin-bottom: 16px;
 }

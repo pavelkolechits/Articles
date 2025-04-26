@@ -91,9 +91,8 @@ export const Article = (props: ArticleProps) => {
         content = (<Text title={error} />)
     } else {
         content = (
-
             <>
-                <Avatar size={200} src={article?.img} className={cls.avatar} />
+                <Avatar size={200} src={article?.img} />
                 <Text
                     className={cls.title}
                     title={article?.title}
@@ -108,9 +107,6 @@ export const Article = (props: ArticleProps) => {
                     <Icon className={cls.icon} Svg={DateIcon} />
                     <Text text={article?.createdAt} />
                 </div>
-
-
-
                 {article?.blocks.map(renderBlock)}
             </>
 

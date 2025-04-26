@@ -16,6 +16,7 @@ interface TextProps {
     theme?: TextTheme;
     align?: TextAlign;
     size?: TextSize;
+    pre?: boolean
 }
 
 
@@ -27,12 +28,13 @@ export const Text = memo((props: TextProps) => {
         theme = 'primary',
         align = 'left',
         size = 'size_m',
+        pre
     } = props;
 
     return (
         <div className={classNames(cls.Text, {}, [className, cls[theme], cls[align], cls[size]])}>
             {title && <p className={cls.title}>{title}</p>}
-            {text && <p className={cls.text}>{text}</p>}
+            {text && <p className={cls.text}>{pre ? <pre>{text}</pre> : text}</p>}
         </div>
     );
 });
