@@ -3,11 +3,13 @@ import AboutIcon from 'shared/assets/icons/aboutIcon.svg'
 import ProfileIcon from 'shared/assets/icons/profileIcon.svg'
 import ArticlesIcon from 'shared/assets/icons/articlesIcon.svg'
 import CreateArticleIcon from 'shared/assets/icons/createArticleIcon.svg'
+import PreviewArticleIcon from 'shared/assets/icons/preview.svg'
 import { createSelector } from "@reduxjs/toolkit";
 import { getUserAuthData } from "entities/User";
 import {
     getRouteAbout,
     getRouteArticleList,
+    getRouteArticlePreview,
     getRouteCreateArticle,
     getRouteMain,
     getRouteProfile
@@ -49,6 +51,11 @@ export const getSidebarItems = createSelector(getUserAuthData,
                 path: getRouteCreateArticle(),
                 text: 'create article',
                 Icon: CreateArticleIcon
+            },
+            {
+                path: getRouteArticlePreview(),
+                text: 'preview article',
+                Icon: PreviewArticleIcon
             }
             )
         }

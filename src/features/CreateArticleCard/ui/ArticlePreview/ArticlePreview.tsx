@@ -60,7 +60,7 @@ export const ArticlePreview = (props: ArticlePreviewProps) => {
 
     return (
         <div className={classNames(cls.ArticlePreview, {}, [className])}>
-            <Avatar size={200} src={'/'} className={cls.avatar} />
+            <Avatar size={200} src={data?.image} className={cls.avatar} />
             <Text
                 className={cls.title}
                 title={data?.title}

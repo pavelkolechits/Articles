@@ -3,23 +3,18 @@ import { ArticleCodeBlock, ArticleImageBlock, ArticleTextBlock } from "entities/
 
 
 
-interface ArticleTextBlockDraft extends ArticleTextBlock {
-    pharagraph: string
-}
-
 export interface CreateArticleSchema {
     isLoading?: boolean;
     error?: string;
     article: {
+        userId: string
         title: string;
         subtitle: string;
-        type: ArticleType[];
+        image: string;
+        type: ArticleType[] ;
         blocks: ArticleBlock[] | [];
-        textBlockDraft:{
-            block: ArticleTextBlock,
-            pharagraph: string
-        } 
+        textBlockDraft:ArticleTextBlock;
         imgBlockDraft: ArticleImageBlock;
-        codeBlockDraft: ArticleCodeBlock 
+        codeBlockDraft: ArticleCodeBlock
     }
 }

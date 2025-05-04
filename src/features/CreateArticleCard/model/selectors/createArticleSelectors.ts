@@ -11,10 +11,10 @@ export const getCreateArticleData = (
 ) => state.createArticle?.article
 export const getTextBlockTitle = (
     state: StateSchema
-) => state.createArticle?.article.textBlockDraft?.block.title ?? ''
-export const getTextBlockPharagraph = (
+) => state.createArticle?.article.textBlockDraft?.title ?? ''
+export const getTextBlockText = (
     state: StateSchema
-) => state.createArticle?.article.textBlockDraft.pharagraph ?? ''
+) => state.createArticle?.article.textBlockDraft.text ?? ''
 
 
 

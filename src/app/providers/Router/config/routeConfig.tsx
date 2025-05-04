@@ -1,6 +1,7 @@
 import { AboutPage } from "pages/AboutPage"
 import { ArticleListPage } from "pages/ArticleListPage"
 import { ArticlePage } from "pages/ArticlePage"
+import ArticlePreviewPage from "pages/ArticlePreviewPage/ui/ArticlePreviewPage"
 import { CreateArticlePage } from "pages/CreateArticlePage"
 import { MainPage } from "pages/MainPage"
 import { NotFoundPage } from "pages/NotFoundPage"
@@ -11,6 +12,7 @@ import {
     getRouteAbout,
     getRouteArticle,
     getRouteArticleList,
+    getRouteArticlePreview,
     getRouteCreateArticle,
     getRouteMain,
     getRouteNotFound,
@@ -54,6 +56,11 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
     [AppRoutes.CREATE_ARTICLE]: {
         path: getRouteCreateArticle(),
         element: <CreateArticlePage />,
+        authOnly: true
+    },
+    [AppRoutes.ARTICLE_PREVIEW]: {
+        path: getRouteArticlePreview(),
+        element: <ArticlePreviewPage/>,
         authOnly: true
     }
 

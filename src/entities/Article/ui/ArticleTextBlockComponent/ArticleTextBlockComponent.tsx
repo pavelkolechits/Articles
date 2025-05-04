@@ -9,6 +9,11 @@ interface ArticleTextBlockComponentProps {
 }
 
 export const ArticleTextBlockComponent = ({ className, block }: ArticleTextBlockComponentProps) => {
+
+
+    const splitParagraph = block.text.replace('<br/>', '\n')
+
+
     return (
         <div
             className={classNames(cls.ArticleTextBlockComponent, {}, [
@@ -21,13 +26,10 @@ export const ArticleTextBlockComponent = ({ className, block }: ArticleTextBlock
                     className={cls.title}
                 />
             )}
-            {block.paragraphs.map((paragraph, index) => (
-                <Text
-                    key={index}
-                    text={paragraph}
-                    className={cls.paragraph}
-                />
-            ))}
+            <Text
+                text={splitParagraph}
+                className={cls.paragraph}
+            />
         </div>
     );
 }

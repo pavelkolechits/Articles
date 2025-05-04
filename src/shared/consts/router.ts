@@ -5,7 +5,8 @@ export enum AppRoutes {
     NOT_FOUND = 'not_found',
     ARTICLE = 'article',
     ARTICLE_LIST = 'article_list',
-    CREATE_ARTICLE = 'create_article'
+    CREATE_ARTICLE = 'create_article',
+    ARTICLE_PREVIEW = 'article_preview'
 }
 
 export const getRouteMain = () => '/'
@@ -15,3 +16,5 @@ export const getRouteNotFound = () => '*'
 export const getRouteArticle = (id: string) => `/articles/${id}`
 export const getRouteArticleList = () => '/articles'
 export const getRouteCreateArticle = () => '/create_article'
+export const getRouteArticlePreview = () => '/article_preview'
+
