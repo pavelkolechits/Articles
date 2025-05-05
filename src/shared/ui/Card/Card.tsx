@@ -2,7 +2,7 @@ import { classNames } from 'shared/helpers/classNames/classNames';
 import { HTMLAttributes, memo, ReactNode } from 'react';
 import cls from './Card.module.scss';
 
-type CardTheme =  'outlined' | 'normal'
+type CardTheme =  'outlined' | 'normal' | 'background'
   
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {

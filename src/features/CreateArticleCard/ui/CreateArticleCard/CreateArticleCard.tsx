@@ -13,6 +13,8 @@ import { ArticleBlock } from 'entities/Article'
 import { ArticleBlockType } from 'entities/Article/model/types/article'
 import { useSelector } from 'react-redux'
 import { getCreateArticleData } from 'features/CreateArticleCard/model/selectors/createArticleSelectors'
+import { ImageBlock } from '../ImageBlock/ImageBlock'
+import { CodeBlock } from '../CodeBlock/CodeBlock'
 
 interface CreateArticleCardProps {
     className?: string
@@ -36,6 +38,14 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
     const addTextBlock = () => {
         dispatch(createArticleActions.addTextBlock())
     }
+
+    const addImgBlock = () => {
+        dispatch(createArticleActions.addImgBlock())
+    }
+
+    const addCodeBlock = () => {
+        dispatch(createArticleActions.addCodeBlock())
+    }
     
     const renderBlock = useCallback((block: ArticleBlock) => {
         switch (block.type) {
@@ -50,6 +60,25 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
                     id={block.id}
                 />
             );
+        case ArticleBlockType.IMAGE:
+            return (
+                <ImageBlock
+                    key={block.id}
+                    className={cls.block}
+                    title={block.title}
+                    id={block.id}
+        
+                />
+            );
+        case ArticleBlockType.CODE:
+            return (
+                <CodeBlock
+                    key={block.id}
+                    className={cls.block}
+                    id={block.id}
+                    code={block.code}
+                />
+            );
         default:
             return null;
         }
@@ -60,6 +89,8 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
             <CreateArticleCardHeader />
             <div className={cls.wrapBtn}>
                 <Button onClick={addTextBlock} theme='outline'>{t('add text')}</Button>
+                <Button onClick={addImgBlock} theme='outline'>{t('add image')}</Button>
+                <Button onClick={addCodeBlock} theme='outline'>{t('add code')}</Button>
             </div>
             {draftData?.blocks.map(renderBlock)}
         </div>

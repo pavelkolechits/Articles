@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CreateArticleSchema } from '../types/createArticleSchema'
 import { ArticleType } from 'entities/Article'
-import { ArticleBlockType, ArticleTextBlock } from 'entities/Article/model/types/article'
+import { ArticleBlockType, ArticleCodeBlock, ArticleImageBlock, ArticleTextBlock } from 'entities/Article/model/types/article'
 import { ArticleHeaderResponse, createArticleTemplate } from '../services/createArticleTemplate/createArticleTemplate'
 import { title } from 'process'
 
@@ -49,22 +49,38 @@ const createArticleSlice = createSlice({
         setArticleType: (state, action: PayloadAction<string>) => {
             state.article.type.push(action.payload as ArticleType)
         },
-        setText: (state, action: PayloadAction<string>) => {
-            const text = action.payload
+        setText: (state, action: PayloadAction<{text: string, id: string}>) => {
+            const text = action.payload.text
             const resText = text.replace('\n', '<br/>')
-            state.article.textBlockDraft.text = resText
+            const block = state.article.blocks.find(
+                block => block.id === action.payload.id
+            ) as ArticleTextBlock
+            block.text = resText
+        },
+        setCode: (state, action: PayloadAction<{code: string, id: string}>) => {
+            const code = action.payload.code
+            const resCode = code.replace('\n', '<br/>')
+            const block = state.article.blocks.find(
+                block => block.id === action.payload.id
+            ) as ArticleCodeBlock
+            block.code = resCode
         },
         setTextTitle: (state, action: PayloadAction< {title: string, id: string}>) => {
             const block = state.article.blocks.find(
                 block => block.id === action.payload.id
             ) as ArticleTextBlock
             block.title = action.payload.title
-
+        },
+        setImgTitle: (state, action: PayloadAction< {title: string, id: string}>) => {
+            const block = state.article.blocks.find(
+                block => block.id === action.payload.id
+            ) as ArticleImageBlock
+            block.title = action.payload.title
         },
         saveTextBlock: (state) => {
             state.article.blocks = [...state.article.blocks, state.article.textBlockDraft]
         },
-        deleteTextBlock: (state, action: PayloadAction<string>) => {
+        deleteBlock: (state, action: PayloadAction<string>) => {
             const filtredBlocks =  state.article.blocks.filter(block =>  block.id !== action.payload)
             state.article.blocks = filtredBlocks
         },
@@ -77,6 +93,25 @@ const createArticleSlice = createSlice({
                 id: String(id),
                 text: ''
             } as ArticleTextBlock]
+        },
+        addImgBlock: (state) => {
+            const id = Date.now()
+            
+            state.article.blocks = [...state.article.blocks, {
+                type: ArticleBlockType.IMAGE,
+                title: '',
+                id: String(id),
+                src: '/'
+            } as ArticleImageBlock]
+        },
+        addCodeBlock: (state) => {
+            const id = Date.now()
+            
+            state.article.blocks = [...state.article.blocks, {
+                type: ArticleBlockType.CODE,
+                id: String(id),
+                code: ''
+            } as ArticleCodeBlock]
         }
     },
     extraReducers: (builder) => {

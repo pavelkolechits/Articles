@@ -61,7 +61,7 @@ export const CreateArticleCardHeader = memo((props: CreaateArticleCardHeaderProp
             <Input readonly={isSave} value={subtitle} onChange={onChangeSubTitle} textAlign="start" text='subtitle' />
             <ArticleTypeSelector />
             {!isSave ?
-                <Button onClick={onSaveHeaderData} className={cls.saveBtn} theme='outline'>{t('save')}</Button>
+                <Button onClick={onSaveHeaderData} className={cls.saveBtn} theme='outline-success'>{t('save')}</Button>
                 :
                 <Button onClick={onEditHeaderData} theme='outline'>{t('edit')}</Button>}
         </div>

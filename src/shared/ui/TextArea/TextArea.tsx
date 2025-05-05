@@ -8,12 +8,13 @@ interface TextAreaProps {
     max?: boolean;
     value?: string | number;
     onChange?: (value: string) => void;
+    readonly?: boolean
 
 }
 
 export const TextArea = memo((props: TextAreaProps ) => {
 
-    const { className, value, onChange } = props
+    const { className, value, onChange, readonly } = props
     const { t } = useTranslation()
 
     const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,7 +23,7 @@ export const TextArea = memo((props: TextAreaProps ) => {
 
     return (
         <div className={classNames( cls.TextAreaWrap , {}, [className])}>
-            <textarea className={cls.textArea} value={value} onChange={onChangeText} />
+            <textarea disabled={readonly} className={cls.textArea} value={value} onChange={onChangeText} />
         </div>
     )
 })

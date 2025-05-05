@@ -38,7 +38,7 @@ export const ImageUploader = (props: ImageUploaderProps) => {
     return (
         <div className={classNames(cls.ImageUploader, {}, [className])}>
             {!file && <label >{t('Choose file to upload')}</label>}
-            <input disabled={readonly} type="file" onChange={onChangeHandler} />
+            <input className={cls.input} disabled={readonly} type="file" onChange={onChangeHandler} />
         </div>
     )
 }

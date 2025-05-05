@@ -17,7 +17,6 @@ i18n
 
     .init({
 
-        appendNamespaceToMissingKey: true,
 
         lng: 'en',
         fallbackLng: 'en',
