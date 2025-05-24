@@ -11,13 +11,13 @@ import {
     getCreateArticleTitle
 } from 'features/CreateArticleCard/model/selectors/createArticleSelectors'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
-import { Select, SelectOptions } from 'shared/ui/Select/Select'
-import { ArticleType } from 'entities/Article'
 import { ArticleTypeSelector } from '../SelectArticleType/ArticleTypeSelector'
 import { ImageUploader } from 'shared/ui/ImageUploader/ImageUploader'
 import { Avatar } from 'shared/ui/Avatar/Avatar'
 import { Button } from 'shared/ui/Button/Button'
-import { createArticleTemplate } from 'features/CreateArticleCard/model/services/createArticleTemplate/createArticleTemplate'
+import { createArticleHeader } from '../../model/services/createArticleHeader/createArticleHeader'
+import { updateArticleHeader } from '../../model/services/updateArticleHeader/updateArticleHeader'
+import { getArticleDraft } from 'features/CreateArticleCard/model/selectors/articleDraftSelectors'
 
 interface CreaateArticleCardHeaderProps {
     className?: string
@@ -32,23 +32,32 @@ export const CreateArticleCardHeader = memo((props: CreaateArticleCardHeaderProp
     const dispatch = useAppDispatch()
     const title = useSelector(getCreateArticleTitle)
     const subtitle = useSelector(getCreateArticleSubTitle)
-    const [isSave, setIsSave] = useState(false)
+    const articleHeaderData = useSelector(getCreateArticleData)
+    const [isSave, setIsSave] = useState(articleHeaderData?.id === undefined)
     const [img, setImg] = useState<FormData | null>(null)
-    const articleImage = useSelector(getCreateArticleData)?.image
+    const articleImage = useSelector(getArticleDraft)?.image
 
     const onChangeTitle = useCallback((title: string) => {
         dispatch(createArticleActions.setArticleTitle(title))
     }, [dispatch])
+
     const onChangeSubTitle = useCallback((subtitle: string) => {
         dispatch(createArticleActions.setArticleSubtitle(subtitle))
     }, [dispatch])
+
     const onSaveHeaderData = useCallback(() => {
         setIsSave(true)
-        dispatch(createArticleTemplate(img))
-    }, [dispatch, img])
+        if(articleHeaderData?.id) {
+            dispatch(updateArticleHeader(img))
+        } else {
+            dispatch(createArticleHeader(img))
+        }
+    }, [articleHeaderData?.id, dispatch, img])
+
     const onEditHeaderData = useCallback(() => {
         setIsSave(false)
     }, [])
+    
     const onChangeImg = useCallback((img: FormData) => {
         setImg(img)
     },[])

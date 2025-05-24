@@ -7,14 +7,11 @@ export interface CreateArticleSchema {
     isLoading?: boolean;
     error?: string;
     article: {
-        userId: string
+        id?: string;
         title: string;
         subtitle: string;
         image: string;
         type: ArticleType[] ;
         blocks: ArticleBlock[] | [];
-        textBlockDraft:ArticleTextBlock;
-        imgBlockDraft: ArticleImageBlock;
-        codeBlockDraft: ArticleCodeBlock
     }
 }

@@ -7,9 +7,10 @@ import { memo, useCallback, useState } from 'react'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { createArticleActions } from 'features/CreateArticleCard/model/slices/createArticleSlice'
 import { Button } from 'shared/ui/Button/Button'
-import { useSelector } from 'react-redux'
-import { getCreateArticleData } from 'features/CreateArticleCard/model/selectors/createArticleSelectors'
+import { createArticleText } from '../../model/services/createArticleText/createArticleText'
 import { ArticleTextBlock } from 'entities/Article/model/types/article'
+import { updateArticleText } from 'features/CreateArticleCard/model/services/updateArticleText.ts/updateArticleText'
+import { deleteArticleBlock } from 'features/CreateArticleCard/model/services/deleteBlock/deleteBlock'
 
 
 
@@ -17,15 +18,18 @@ interface TextBlockProps {
     className?: string;
     text?: string;
     title?: string;
-    id: string
+    id: string;
+    block: ArticleTextBlock
 }
 
 export const TextBlock = memo((props: TextBlockProps) => {
 
-    const { className, title, text, id } = props
+    const { className, title, text, id, block } = props
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const [isSave, setIsSave] = useState(false)
+    const [isCreated, setIsCreated] = useState(false)
+
 
     const onChangeTitle = useCallback((title: string) => {
         dispatch(createArticleActions.setTextTitle({ id, title }))
@@ -37,17 +41,25 @@ export const TextBlock = memo((props: TextBlockProps) => {
 
     const saveBlock = useCallback(() => {
         setIsSave(true)
-    }, [dispatch])
+        if(isCreated) {
+            dispatch(updateArticleText(block))
+           
+        } else {
+            dispatch(createArticleText(block))
+        }
+        setIsCreated(true)
+    }, [block, dispatch, isCreated])
 
     const editBlock = useCallback(() => {
         setIsSave(false)
-    }, [dispatch])
+    }, [])
 
     const deleteBlock = useCallback(() => {
         dispatch(createArticleActions.deleteBlock(id))
+        dispatch(deleteArticleBlock(id))
     }, [dispatch, id])
 
-
+  
 
     return (
         <div className={classNames(cls.TextBlock, {[cls.readonly]: isSave}, [className])}>

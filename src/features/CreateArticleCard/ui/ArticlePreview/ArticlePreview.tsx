@@ -13,19 +13,35 @@ import { ArticleBlockType } from 'entities/Article/model/types/article'
 import { ArticleCodeBlockComponent } from 'entities/Article/ui/ArticleCodeBlockComponent/ArticleCodeBlockComponent'
 import { ArticleImageBlockComponent } from 'entities/Article/ui/ArticleImageBlockComponent/ArticleImageBlockComponent'
 import { ArticleTextBlockComponent } from 'entities/Article/ui/ArticleTextBlockComponent/ArticleTextBlockComponent'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
+import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
+import { fetchArticleDraft } from 'features/CreateArticleCard/model/services/fetchArticleDraft/fetchArticleDraft'
+import { getArticleDraft } from 'features/CreateArticleCard/model/selectors/articleDraftSelectors'
+import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
+import { articleDraftReducer } from 'features/CreateArticleCard/model/slices/articleDraftSlice'
 
 
 interface ArticlePreviewProps {
     className?: string
 }
 
+const dynamicReducersProps: UseDynamicReducersProps = {
+    reducers: { articleDraft: articleDraftReducer },
+    removeAfterAnmount: false
+}
+
 export const ArticlePreview = (props: ArticlePreviewProps) => {
 
     const { className } = props
     const { t } = useTranslation()
-    const data = useSelector(getCreateArticleData)
+    const data = useSelector(getArticleDraft)
     const date = new Date().toLocaleDateString()
+    const dispatch = useAppDispatch()
+    useDynamicReducers(dynamicReducersProps)
+
+    useEffect(() => {
+        dispatch(fetchArticleDraft())
+    }, [dispatch])
 
     const renderBlock = useCallback((block: ArticleBlock) => {
         switch (block.type) {

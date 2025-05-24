@@ -10,17 +10,19 @@ import { createArticleActions } from "../../slices/createArticleSlice"
 
 export interface ArticleHeaderResponse {
     id: string,
-    userId: string,
     image: string,
-    title: string
+    title: string,
+    subtitle: string
 }
 
-export const createArticleTemplate = createAsyncThunk<ArticleHeaderResponse, FormData | null, ThunkConfig>(
-    'create_article/createArticleTemplate',
+export const createArticleHeader = createAsyncThunk<ArticleHeaderResponse, FormData | null, ThunkConfig>(
+    'create_article/createArticleHeader',
     async (formData, thunkAPI) => {
+
         const { rejectWithValue, extra, getState } = thunkAPI
         const articleHeaderData = getCreateArticleData(getState())
         const userId = getUserAuthData(getState())?.user.id
+
         if (formData && userId) {
             formData.append('title', articleHeaderData?.title ?? '')
             formData.append('subtitle', articleHeaderData?.subtitle ?? '')
@@ -33,7 +35,7 @@ export const createArticleTemplate = createAsyncThunk<ArticleHeaderResponse, For
                 {
                     headers: {
                         // Authorization: 'Bearer ' + token,
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data' 
                     }
                 })
 
@@ -41,7 +43,7 @@ export const createArticleTemplate = createAsyncThunk<ArticleHeaderResponse, For
                 throw new AxiosError()
             }
 
-            return { ...response.data, image: 'http://localhost:7000/' + response.data.image }
+            return { ...response.data, image: 'http://localhost:7000' + response.data.image } 
 
         } catch (error) {
             const err = axiosErrorHandler((error as AxiosError).message)

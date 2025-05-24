@@ -19,7 +19,8 @@ export interface StateSchema {
     registration?: RegistrationSchema,
     article?: ArticleSchema;
     articleComments?: ArticleCommentsSchema,
-    createArticle?: CreateArticleSchema
+    createArticle?: CreateArticleSchema,
+    articleDraft?: ArticleSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

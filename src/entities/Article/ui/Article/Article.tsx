@@ -92,7 +92,7 @@ export const Article = (props: ArticleProps) => {
     } else {
         content = (
             <>
-                <Avatar size={200} src={article?.img} />
+                <Avatar size={200} src={article?.image} />
                 <Text
                     className={cls.title}
                     title={article?.title}
@@ -113,11 +113,6 @@ export const Article = (props: ArticleProps) => {
         )
     }
 
-
-
-
-
     return content
-
 
 }

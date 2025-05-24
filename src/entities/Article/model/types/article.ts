@@ -38,7 +38,7 @@ export interface IArticle {
       id: string;
       title: string;
       subtitle: string;
-      img: string;
+      image: string;
       views: number;
       createdAt: string;
       type: ArticleType[],

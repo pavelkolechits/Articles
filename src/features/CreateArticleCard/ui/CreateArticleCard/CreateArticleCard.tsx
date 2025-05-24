@@ -2,7 +2,7 @@ import { classNames } from 'shared/helpers/classNames/classNames'
 import { useTranslation } from 'react-i18next'
 import cls from './CreateArticleCard.module.scss'
 import { ArticlePreview } from '../ArticlePreview/ArticlePreview'
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { Button } from 'shared/ui/Button/Button'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
 import { createArticleActions, createArticleReducer } from 'features/CreateArticleCard/model/slices/createArticleSlice'
@@ -15,13 +15,16 @@ import { useSelector } from 'react-redux'
 import { getCreateArticleData } from 'features/CreateArticleCard/model/selectors/createArticleSelectors'
 import { ImageBlock } from '../ImageBlock/ImageBlock'
 import { CodeBlock } from '../CodeBlock/CodeBlock'
+import { articleDraftReducer } from 'features/CreateArticleCard/model/slices/articleDraftSlice'
+import { fetchArticleDraft } from 'features/CreateArticleCard/model/services/fetchArticleDraft/fetchArticleDraft'
 
 interface CreateArticleCardProps {
     className?: string
 }
 
 const dynamicReducers: UseDynamicReducersProps = {
-    reducers: { createArticle: createArticleReducer }, removeAfterAnmount: false
+    reducers: { createArticle: createArticleReducer, articleDraft: articleDraftReducer },
+    removeAfterAnmount: false
 }
 
 type BlockType = 'img' | 'code' | 'text' | null
@@ -32,6 +35,10 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const draftData = useSelector(getCreateArticleData)
+
+    useEffect(() => {
+        dispatch(fetchArticleDraft())
+    }, [dispatch])
 
     useDynamicReducers(dynamicReducers)
 
@@ -58,6 +65,7 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
                     text={block.text}
                     title={block.title}
                     id={block.id}
+                    block={block}
                 />
             );
         case ArticleBlockType.IMAGE:
