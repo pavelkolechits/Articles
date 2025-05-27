@@ -6,27 +6,33 @@ import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { useCallback, useState } from 'react'
 import { Button } from 'shared/ui/Button/Button'
 import { createArticleActions } from 'features/CreateArticleCard/model/slices/createArticleSlice'
+import { createArticleCode } from 'features/CreateArticleCard/model/services/createArticleCode/createArticleCode'
+import { ArticleCodeBlock } from 'entities/Article/model/types/article'
+import { deleteArticleBlock } from 'features/CreateArticleCard/model/services/deleteBlock/deleteBlock'
 
 interface CodeBlockProps {
     className?: string
     id: string;
-    code: string
+    code: string;
+    block: ArticleCodeBlock
 }
 
 export const CodeBlock = (props: CodeBlockProps) => {
 
-    const { className, id, code } = props
+    const { className, id, code, block } = props
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const [isSave, setIsSave] = useState(false)
 
     const deleteBlock = useCallback(() => {
         dispatch(createArticleActions.deleteBlock(id))
+        dispatch(deleteArticleBlock({blockId: id, endpoint: 'code'}))
     }, [dispatch, id])
 
     const saveBlock = useCallback(() => {
         setIsSave(true)
-    }, [])
+        dispatch(createArticleCode(block))
+    }, [block, dispatch])
 
     const onChangeText = useCallback((code: string) => {
         dispatch(createArticleActions.setCode({ id, code }))

@@ -9,6 +9,7 @@ interface ArticleImageBlockComponentProps {
 }
 
 export const ArticleImageBlockComponent = ({ className, block }: ArticleImageBlockComponentProps) => {
+    console.log(block)
     return (
         <div
             className={classNames(

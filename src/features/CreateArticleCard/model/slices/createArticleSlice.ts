@@ -7,6 +7,8 @@ import { updateArticleHeader } from '../services/updateArticleHeader/updateArtic
 import { createArticleText } from '../services/createArticleText/createArticleText'
 import { updateArticleText } from '../services/updateArticleText.ts/updateArticleText'
 import { fetchArticleDraft } from '../services/fetchArticleDraft/fetchArticleDraft'
+import { createArticleCode } from '../services/createArticleCode/createArticleCode'
+import { createArticleImg } from '../services/createArticleImg/createArticleImg'
 
 const initialState: CreateArticleSchema = {
     article: {
@@ -42,16 +44,13 @@ const createArticleSlice = createSlice({
         },
 
         setCode: (state, action: PayloadAction<{ code: string, id: string }>) => {
-            const code = action.payload.code
-            const resCode = code.replace('\n', '<br/>')
+        
     
             const block = state.article.blocks.find(
                 block => block.id === action.payload.id
-            )
+            ) as ArticleCodeBlock
 
-            if( block?.type === ArticleBlockType.CODE ) {
-                block.code = resCode
-            }
+            block.code = action.payload.code
             
         },
         setTextTitle: (state, action: PayloadAction<{ title: string, id: string }>) => {
@@ -182,6 +181,24 @@ const createArticleSlice = createSlice({
             }
         ),
         builder.addCase(
+            createArticleCode.pending, (state) => {
+                state.isLoading = true
+            }
+        ),
+        builder.addCase(
+            createArticleCode.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload
+            }
+        ),
+        builder.addCase(
+            createArticleCode.fulfilled, (state, action: PayloadAction<ArticleCodeBlock>) => {
+                const udatedBlocks = state.article.blocks.map(
+                    (block) => block.id === action.payload.id ? action.payload : block)
+                state.article.blocks = udatedBlocks
+            }
+        ),
+        builder.addCase(
             updateArticleText.pending, (state) => {
                 state.isLoading = true
             }
@@ -197,6 +214,24 @@ const createArticleSlice = createSlice({
                 const udatedBlocks = state.article.blocks.map(
                     (block) => block.id === action.payload.id ? action.payload : block)
                 state.article.blocks = udatedBlocks
+            }
+        ),
+        builder.addCase(
+            createArticleImg.pending, (state) => {
+                state.isLoading = true
+            }
+        ),
+        builder.addCase(
+            createArticleImg.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload
+            }
+        ),
+        builder.addCase(
+            createArticleImg.fulfilled, (state, action: PayloadAction<ArticleImageBlock>) => {
+                const updatedBlocks = state.article.blocks.map(
+                    (block) => block.id === action.payload.id ? action.payload : block)
+                state.article.blocks = updatedBlocks
             }
         )
     }

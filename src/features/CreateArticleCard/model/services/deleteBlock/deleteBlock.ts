@@ -6,15 +6,19 @@ import { axiosErrorHandler } from "shared/helpers/axiosErrorHandler/axiosErrorHa
 import { ArticleTextBlock } from "entities/Article/model/types/article"
 
 
-export const deleteArticleBlock = createAsyncThunk<unknown, string, ThunkConfig>(
+export type BlockEndpoint = 'text' | 'img' | 'code'
+
+
+
+export const deleteArticleBlock = createAsyncThunk<void, {blockId: string, endpoint: BlockEndpoint}, ThunkConfig>(
     'create_article/deleteArticleBlock',
-    async (blockId, thunkAPI) => {
+    async ({blockId, endpoint}, thunkAPI) => {
         const { rejectWithValue, extra, getState } = thunkAPI
         const articleId = getCreateArticleData(getState())?.id ?? ''
 
         try {
-            const response =  await  extra.api.delete<unknown>(
-                `/text`,
+            const response =  await  extra.api.delete<void>(
+                `/${endpoint}`,
                 {
                     data: {
                         articleId,
@@ -23,11 +27,7 @@ export const deleteArticleBlock = createAsyncThunk<unknown, string, ThunkConfig>
                 }
             )
 
-            if (!response.data) {
-                throw new AxiosError()
-            }
-
-            return response.data 
+       
 
         } catch (error) {
             const err = axiosErrorHandler((error as AxiosError).message)

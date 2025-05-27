@@ -17,6 +17,7 @@ import { ImageBlock } from '../ImageBlock/ImageBlock'
 import { CodeBlock } from '../CodeBlock/CodeBlock'
 import { articleDraftReducer } from 'features/CreateArticleCard/model/slices/articleDraftSlice'
 import { fetchArticleDraft } from 'features/CreateArticleCard/model/services/fetchArticleDraft/fetchArticleDraft'
+import { publishArticle } from 'features/CreateArticleCard/model/services/publishArticle/publishArticle'
 
 interface CreateArticleCardProps {
     className?: string
@@ -53,7 +54,7 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
     const addCodeBlock = () => {
         dispatch(createArticleActions.addCodeBlock())
     }
-    
+
     const renderBlock = useCallback((block: ArticleBlock) => {
         switch (block.type) {
 
@@ -75,7 +76,7 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
                     className={cls.block}
                     title={block.title}
                     id={block.id}
-        
+
                 />
             );
         case ArticleBlockType.CODE:
@@ -85,6 +86,7 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
                     className={cls.block}
                     id={block.id}
                     code={block.code}
+                    block={block}
                 />
             );
         default:
@@ -92,15 +94,25 @@ export const CreateArticleCard = memo((props: CreateArticleCardProps) => {
         }
     }, [])
 
+    const onPublishArticle = useCallback(() => {
+        dispatch(publishArticle())
+    }, [dispatch])
+
     return (
         <div className={classNames(cls.CreateArticleCard, {}, [className])}>
-            <CreateArticleCardHeader />
+            <CreateArticleCardHeader
+                id={draftData?.id}
+                image={draftData?.image}
+                title={draftData?.title}
+                subtitle={draftData?.subtitle}
+            />
             <div className={cls.wrapBtn}>
                 <Button onClick={addTextBlock} theme='outline'>{t('add text')}</Button>
                 <Button onClick={addImgBlock} theme='outline'>{t('add image')}</Button>
                 <Button onClick={addCodeBlock} theme='outline'>{t('add code')}</Button>
             </div>
             {draftData?.blocks.map(renderBlock)}
+            <Button theme='outline' onClick={onPublishArticle}>{t('publish')}</Button>
         </div>
     )
 })

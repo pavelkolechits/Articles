@@ -4,7 +4,6 @@ import { AxiosError } from "axios"
 import { getUserAuthData } from "entities/User"
 import { axiosErrorHandler } from "shared/helpers/axiosErrorHandler/axiosErrorHandler"
 import { ArticleSchema, IArticle } from "entities/Article"
-import { CreateArticleSchema } from "../../types/createArticleSchema"
 
 
 export const fetchArticleDraft = createAsyncThunk<IArticle, void, ThunkConfig>(

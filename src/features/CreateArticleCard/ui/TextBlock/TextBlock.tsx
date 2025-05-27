@@ -27,9 +27,11 @@ export const TextBlock = memo((props: TextBlockProps) => {
     const { className, title, text, id, block } = props
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
-    const [isSave, setIsSave] = useState(false)
-    const [isCreated, setIsCreated] = useState(false)
 
+    
+    const [isCreated , setIsCreated] = useState(text !== '')
+
+    const [edit, setEdit] = useState(false)
 
     const onChangeTitle = useCallback((title: string) => {
         dispatch(createArticleActions.setTextTitle({ id, title }))
@@ -40,39 +42,39 @@ export const TextBlock = memo((props: TextBlockProps) => {
     }, [dispatch, id])
 
     const saveBlock = useCallback(() => {
-        setIsSave(true)
+   
         if(isCreated) {
             dispatch(updateArticleText(block))
            
         } else {
             dispatch(createArticleText(block))
         }
-        setIsCreated(true)
+        setEdit(true)
     }, [block, dispatch, isCreated])
 
     const editBlock = useCallback(() => {
-        setIsSave(false)
+        setEdit(false)
     }, [])
 
     const deleteBlock = useCallback(() => {
         dispatch(createArticleActions.deleteBlock(id))
-        dispatch(deleteArticleBlock(id))
+        dispatch(deleteArticleBlock({endpoint: 'text', blockId: id}))
     }, [dispatch, id])
 
   
 
     return (
-        <div className={classNames(cls.TextBlock, {[cls.readonly]: isSave}, [className])}>
+        <div className={classNames(cls.TextBlock, {[cls.readonly]: edit}, [className])}>
             <h3 className={cls.h3}>{t('TEXT')}</h3>
             <Input
-                readonly={isSave}
+                readonly={edit}
                 className={cls.input}
                 value={title}
                 onChange={onChangeTitle}
                 textAlign='start'
                 text='title' />
-            <TextArea readonly={isSave} className={cls.textArea} value={text} onChange={onChangeText} />
-            {isSave ?
+            <TextArea readonly={edit} className={cls.textArea} value={text} onChange={onChangeText} />
+            {edit ?
                 <Button theme='outline' onClick={editBlock}>{t('edit')}</Button>
                 :
                 <div className={cls.wrapBtn}>
