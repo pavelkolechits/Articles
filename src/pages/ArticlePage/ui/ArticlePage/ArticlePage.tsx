@@ -5,11 +5,11 @@ import { useParams } from 'react-router-dom'
 import { Text } from 'shared/ui/Text/Text'
 import { CommentList } from 'entities/Comment'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
-import { articleCommentsReducer, getArticleComments } from '../model/slices/articleCommentsSlice'
+import { articleCommentsReducer, getArticleComments } from '../../model/slices/articleCommentsSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
-import { fetchArticleComments } from '../model/services/fetchArticleComments'
+import { fetchArticleComments } from '../../model/services/fetchArticleComments'
 
 
 interface ArticlePageProps {
@@ -29,8 +29,8 @@ const ArticlePage = (props: ArticlePageProps) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchArticleComments())
-    },[dispatch])
+        dispatch(fetchArticleComments(Number(id)))
+    },[dispatch, id])
 
     useDynamicReducers(dynamicReducers)
 

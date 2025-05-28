@@ -8,6 +8,7 @@ import { RegistrationSchema } from "features/Registration";
 import { ArticleSchema } from "entities/Article";
 import { ArticleCommentsSchema } from "pages/ArticlePage/model/types/ArticleCommentsSchema";
 import { CreateArticleSchema } from "features/CreateArticleCard/model/types/createArticleSchema";
+import { AddNewCommentSchema } from "features/AddNewComment/model/types/addNewComment";
 
 
 
@@ -20,7 +21,8 @@ export interface StateSchema {
     article?: ArticleSchema;
     articleComments?: ArticleCommentsSchema,
     createArticle?: CreateArticleSchema,
-    articleDraft?: ArticleSchema
+    articleDraft?: ArticleSchema,
+    addNewComment?: AddNewCommentSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

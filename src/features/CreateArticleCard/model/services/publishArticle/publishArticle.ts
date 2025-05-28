@@ -15,7 +15,7 @@ export const publishArticle = createAsyncThunk<number, void, ThunkConfig>(
         const article = getCreateArticleData(getState())
         const userId = getUserAuthData(getState())?.user.id
 
-        const data = { ...article, views: 0, userId, type: ['IT', 'ALL'] }
+        const data = { ...article, views: 0, userId, type: ['IT'] }
 
         try {
             console.log(data)
