@@ -4,11 +4,6 @@ import { axiosErrorHandler } from "shared/helpers/axiosErrorHandler/axiosErrorHa
 import { ThunkConfig } from "app/providers/StoreProvider"
 import axios from "axios"
 
-
-
-
-
-
 export const fetchArticleById = createAsyncThunk<
     IArticle,
     string,

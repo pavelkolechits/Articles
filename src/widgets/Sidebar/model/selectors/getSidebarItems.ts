@@ -1,25 +1,20 @@
+import { createSelector } from "@reduxjs/toolkit"
+import { getUserAuthData } from "entities/User"
+import {
+    getRouteMain,
+    getRouteAbout,
+    getRouteProfile,
+    getRouteArticleList,
+    getRouteCreateArticle,
+    getRouteArticlePreview
+} from "shared/consts/router"
+import { SidebarItemType } from "../types/sidebar"
 import MainIcon from 'shared/assets/icons/mainIcon.svg'
 import AboutIcon from 'shared/assets/icons/aboutIcon.svg'
 import ProfileIcon from 'shared/assets/icons/profileIcon.svg'
 import ArticlesIcon from 'shared/assets/icons/articlesIcon.svg'
 import CreateArticleIcon from 'shared/assets/icons/createArticleIcon.svg'
 import PreviewArticleIcon from 'shared/assets/icons/preview.svg'
-import { createSelector } from "@reduxjs/toolkit";
-import { getUserAuthData } from "entities/User";
-import {
-    getRouteAbout,
-    getRouteArticleList,
-    getRouteArticlePreview,
-    getRouteCreateArticle,
-    getRouteMain,
-    getRouteProfile
-} from "shared/consts/router";
-
-export interface SidebarItemType {
-    path: string;
-    text: string;
-    Icon: React.FC<React.SVGProps<SVGSVGElement>>
-}
 
 export const getSidebarItems = createSelector(getUserAuthData,
     (userData) => {
@@ -62,4 +57,3 @@ export const getSidebarItems = createSelector(getUserAuthData,
         return sidebarItemList
     }
 )
-
