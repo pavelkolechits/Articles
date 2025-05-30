@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { fetchArticleComments } from '../../model/services/fetchArticleComments'
+import { ArticleComments } from '../ArticleComments/ArticleComments'
 
 
 interface ArticlePageProps {
@@ -25,7 +26,6 @@ const ArticlePage = (props: ArticlePageProps) => {
     const { className } = props
     const { t } = useTranslation()
     const { id } = useParams<{ id: string }>()
-    const comments = useSelector(getArticleComments.selectAll)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const ArticlePage = (props: ArticlePageProps) => {
     return (
         <div className={classNames('', {}, [className])}>
             <Article id={id} />
-            <CommentList comments={comments}/>
+            <ArticleComments id={id}/>
         </div>
     )
 }

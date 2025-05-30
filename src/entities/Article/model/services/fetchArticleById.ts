@@ -14,7 +14,7 @@ export const fetchArticleById = createAsyncThunk<
         const { rejectWithValue, extra } = thunkAPI
 
         try {
-            const response = await axios.get<IArticle>(`http://localhost:8000/articles/${id}`)
+            const response = await axios.get<IArticle>(`http://localhost:7000/articles/${id}`)
 
             return response.data
 

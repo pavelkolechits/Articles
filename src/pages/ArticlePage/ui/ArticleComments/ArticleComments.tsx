@@ -11,13 +11,14 @@ import { getArticleCommentsIsLoading } from "../../model/selectors/commentsSelec
 import { useAppDispatch } from "shared/hoocs/useAppDispatch/useAppDispatch";
 import { Loader } from "shared/ui/Loader/loader/Loader";
 import { addCommentForArticle } from "../../model/services/addCommentForArticle";
+import cls from './ArticleComments.module.scss'
 
-interface ArticleDetailsCommentsProps {
+interface ArticleCommentsProps {
     className?: string;
     id: string;
 }
 
-export const ArticleDetailsComments = (props: ArticleDetailsCommentsProps) => {
+export const ArticleComments = (props: ArticleCommentsProps) => {
     const { className, id } = props;
     const comments = useSelector(getArticleComments.selectAll);
     const dispatch = useAppDispatch();
@@ -35,19 +36,16 @@ export const ArticleDetailsComments = (props: ArticleDetailsCommentsProps) => {
         [dispatch],
     );
     return (
-        <div  className={classNames('', {}, [className])}>
-            <Text
-                
-                title={t('Комментарии')}
-
-            />
+        <div className={classNames(cls.ArticleComments, {}, [className])}>
+            <Text title={t('Comments')} />
             <Suspense fallback={<Loader />}>
                 <AddNewComment onSendComment={onSendComment} />
+                <CommentList
+                    isLoading={commentsIsLoading}
+                    comments={comments}
+                />
             </Suspense>
-            <CommentList
-                isLoading={commentsIsLoading}
-                comments={comments}
-            />
+
         </div>
     );
 };

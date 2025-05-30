@@ -18,7 +18,7 @@ export const fetchArticleComments = createAsyncThunk<
         const { rejectWithValue } = thunkAPI
 
         try {
-            const response = await axios.get<ArticleComment[]>(`http://localhost:8000/comments/${articleId}`)
+            const response = await axios.get<ArticleComment[]>(`http://localhost:7000/comments/${articleId}`)
 
             if (!response.data) {
                 throw new AxiosError()

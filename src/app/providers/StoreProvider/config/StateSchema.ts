@@ -9,6 +9,7 @@ import { ArticleSchema } from "entities/Article";
 import { ArticleCommentsSchema } from "pages/ArticlePage/model/types/ArticleCommentsSchema";
 import { CreateArticleSchema } from "features/CreateArticleCard/model/types/createArticleSchema";
 import { AddNewCommentSchema } from "features/AddNewComment/model/types/addNewComment";
+import { ArticleListPageSchema } from "pages/ArticleListPage/model/types/articleListPageSchema";
 
 
 
@@ -22,7 +23,8 @@ export interface StateSchema {
     articleComments?: ArticleCommentsSchema,
     createArticle?: CreateArticleSchema,
     articleDraft?: ArticleSchema,
-    addNewComment?: AddNewCommentSchema
+    addNewComment?: AddNewCommentSchema,
+    articleListPage?: ArticleListPageSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

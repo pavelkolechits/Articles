@@ -1,3 +1,4 @@
+import { Profile } from "entities/Profile";
 
 export enum ArticleBlockType {
     CODE = 'CODE',
@@ -11,6 +12,8 @@ export enum ArticleType {
     ECONOMIC = 'ECONOMIC',
     ALL = 'ALL'
 }
+
+export type ArticleView = 'tile' | 'list'
 
 export interface ArticleBlockBase {
     id: string;
@@ -42,5 +45,6 @@ export interface IArticle {
       views: number;
       createdAt: string;
       type: ArticleType[],
-      blocks: ArticleBlock[]
+      blocks: ArticleBlock[],
+      author: Partial<Profile>
 }

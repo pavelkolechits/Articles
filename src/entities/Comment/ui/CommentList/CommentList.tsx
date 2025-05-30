@@ -18,9 +18,8 @@ export const CommentList = (props: CommentListProps ) => {
 
     return (
         <div className={classNames( cls.CommentList , {}, [className])}>
-            <Text title={t('Comments')}/>
             {comments?.length ? 
-                comments.map((comment) => {
+                comments.sort((a, b) => Number(b.id) - Number(a.id)).flatMap((comment) => {
                     return <CommentCard key={comment.id} comment={comment}/>
                 })
                 : <Text text={t('Comments not found')}/>
