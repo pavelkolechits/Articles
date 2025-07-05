@@ -58,7 +58,7 @@ export const ArticleListItem = (props: ArticleListItemProps) => {
         );
     }
     return (
-        <div className={classNames(cls.ArticlleListItem, {}, [className])}>
+        <div className={classNames(cls.ArticlleListItem, {}, [className, cls[view]])}>
             <Card theme='outlined' onClick={onOpenArticle} className={cls.card}>
                 <div className={cls.imageWrapper}>
                     <img className={cls.img} src={article.image} alt={article.title} />

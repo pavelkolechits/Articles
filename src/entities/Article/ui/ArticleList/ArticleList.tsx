@@ -30,7 +30,7 @@ export const ArticleList = (props: ArticleListProps) => {
     return (
 
         <div
-            className={classNames(cls.ArticleList, {}, [
+            className={classNames(cls.ArticleList, {}, [ view === 'list' ? cls.list : cls.tile, 
                 className,
             ])}
             data-testid="ArticleList"

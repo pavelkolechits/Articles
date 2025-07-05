@@ -6,4 +6,7 @@ export interface ArticleListPageSchema extends EntityState<IArticle, string | nu
     isLoading?: boolean;
     error?: string;
     view: ArticleView;
+    page: number;
+    hasMore: boolean
+    limit?: number
 }

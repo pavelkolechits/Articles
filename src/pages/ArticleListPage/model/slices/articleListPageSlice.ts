@@ -5,6 +5,7 @@ import { IArticle } from "entities/Article";
 import { ArticleListPageSchema } from "../types/articleListPageSchema";
 import { ArticleView } from "entities/Article/model/types/article";
 import { fetchArticleList } from "../services/fetchArticleList";
+import { LOCAL_STORAGE_ARTICLE_VIEW_KEY } from "shared/consts/localStorage";
 
 
 
@@ -26,21 +27,23 @@ const articleListPageSlice = createSlice({
         entities: {},
         ids: [],
         view: 'list',
+        page: 1,
+        hasMore: true,
+        
     }),
     reducers: {
         setView: (state, action: PayloadAction<ArticleView>) => {
             state.view = action.payload;
-           
+            localStorage.setItem(LOCAL_STORAGE_ARTICLE_VIEW_KEY, action.payload)
         },
-        // initState: (state) => {
-
-        //     state.view = view;
-        //     state.limit = ArticleView.TILE ? 9 : 4;
-        //     state._inited = true;
-        // },
-        // setPage: (state, action: PayloadAction<number>) => {
-        //     state.page = action.payload;
-        // },
+        initState: (state) => {
+            const view = localStorage.getItem(LOCAL_STORAGE_ARTICLE_VIEW_KEY) as ArticleView
+            state.view = view
+            state.limit = view === 'tile' ? 9 : 4
+        },
+        setPage: (state, action: PayloadAction<number>) => {
+            state.page = action.payload;
+        },
         // setSearch: (state, action: PayloadAction<string>) => {
         //     state.search = action.payload;
         // },
