@@ -9,9 +9,7 @@ export const AppRouter = () => {
 
         const element = (
             <Suspense fallback={<PageLoader />}>
-                <div className='page-wrap'>
-                    {route.element}
-                </div>
+                {route.element}
             </Suspense>
         )
         return <Route

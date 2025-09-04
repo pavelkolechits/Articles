@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import { classNames } from "shared/helpers/classNames/classNames";
 import cls from './ArticleList.module.scss'
 import { ArticleListItem } from "../ArticleListItem/ArticleListItem";
+import { Loader } from "shared/ui/Loader/loader/Loader";
+import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { ArticleListItemSkeleton } from "../ArticleListItem/ArticleListItemSkeleton";
 
 
 interface ArticleListProps {
@@ -14,23 +17,24 @@ interface ArticleListProps {
     view: ArticleView
 }
 
-// const getSkeletons = (view: ArticleView) => new Array(view === ArticleView.SMALL ? 9 : 3)
-//     .fill(0)
-//     .map((item, index) => (
-//         // eslint-disable-next-line react/no-array-index-key
-//         <ArticleListItemSkeleton className={cls.card} key={index} view={view} />
-//     ));
 
 export const ArticleList = (props: ArticleListProps) => {
     const { t } = useTranslation();
     const {
-        className, articles, isLoading,  target, view
+        className, articles, isLoading, target, view
     } = props;
+
+    const getSkeletons = (view: ArticleView) => new Array(view === 'tile' ? 9 : 4)
+        .fill(0)
+        .map((item, index) => (
+        
+            <ArticleListItemSkeleton className={cls.card} key={index} view={view} />
+        ));
 
     return (
 
         <div
-            className={classNames(cls.ArticleList, {}, [ view === 'list' ? cls.list : cls.tile, 
+            className={classNames(cls.ArticleList, {}, [view === 'list' ? cls.list : cls.tile,
                 className,
             ])}
             data-testid="ArticleList"
@@ -44,6 +48,7 @@ export const ArticleList = (props: ArticleListProps) => {
                     className={cls.card}
                 />
             ))}
+            {isLoading && getSkeletons(view)}
         </div>
 
     );

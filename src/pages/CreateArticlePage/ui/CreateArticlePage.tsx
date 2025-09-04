@@ -1,6 +1,7 @@
 import { classNames } from 'shared/helpers/classNames/classNames'
 import { useTranslation } from 'react-i18next'
 import { CreateArticleCard } from 'features/CreateArticleCard'
+import { Page } from 'shared/ui/Page/Page'
 
 interface CreateArticlePageProps {
     className?: string
@@ -12,9 +13,9 @@ const CreateArticlePage = (props: CreateArticlePageProps) => {
     const { t } = useTranslation()
 
     return (
-        <div className={classNames('', {}, [className])}>
+        <Page className={classNames('', {}, [className])}>
             <CreateArticleCard/>
-        </div>
+        </Page>
     )
 }
 

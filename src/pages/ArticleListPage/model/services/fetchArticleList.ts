@@ -8,8 +8,13 @@ interface FetchArticleListProps {
     limit?: number
 }
 
+export interface FetchArticleListResponse {
+    articles: IArticle[] | [],
+    hasMore: boolean
+}
+
 export const fetchArticleList = createAsyncThunk<
-    IArticle[],
+    FetchArticleListResponse,
     FetchArticleListProps,
     ThunkConfig
 >(
@@ -20,7 +25,7 @@ export const fetchArticleList = createAsyncThunk<
         const limit = getArticleListLimit(getState())
         try {
 
-            const response = await extra.api.get<IArticle[]>(`/articles`, { params: { page, limit } });
+            const response = await extra.api.get<FetchArticleListResponse>(`/articles`, { params: { page, limit } });
             return response.data;
         } catch (e) {
 

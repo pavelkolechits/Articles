@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next"
-import { ImageUploader } from "shared/ui/ImageUploader/ImageUploader"
+import { Page } from "shared/ui/Page/Page"
 
 
 const AboutPage = () => {
     const { t } = useTranslation('about')
     return (
-        <div>
+        <Page>
             {t('about page')}
-            <ImageUploader/>
-        </div>
+    
+        </Page>
     )
 }
 export default AboutPage
