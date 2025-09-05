@@ -8,5 +8,6 @@ export interface ArticleListPageSchema extends EntityState<IArticle, string | nu
     view: ArticleView;
     page: number;
     hasMore: boolean
-    limit: number
+    limit: number;
+    _inited: boolean
 }

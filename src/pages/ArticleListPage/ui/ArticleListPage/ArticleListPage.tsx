@@ -8,11 +8,12 @@ import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { useCallback, useEffect } from 'react'
 import { fetchArticleList } from '../../model/services/fetchArticleList'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
-import {  getArticleListIsLoading, getArticleListView } from '../../model/selectors/articleListPageSelectors'
+import {  getArticleListInited, getArticleListIsLoading, getArticleListView } from '../../model/selectors/articleListPageSelectors'
 import { ArticleViewSelector } from '../ArticleViewSelector/ArticleViewSelector'
 import { ArticleView } from 'entities/Article/model/types/article'
 import { Page } from 'shared/ui/Page/Page'
 import { fetchNextArticlePage } from 'pages/ArticleListPage/model/services/fetchNextArticlePage'
+import { initArticleListPage } from 'pages/ArticleListPage/model/services/initArticleListPage'
 
 
 interface ArticleListPageProps {
@@ -28,22 +29,24 @@ const ArticleListPage = (props: ArticleListPageProps) => {
 
     const { className } = props
     const { t } = useTranslation()
+
+    useDynamicReducers(dynamicReducersProps)
+
     const dispatch = useAppDispatch()
 
     const article = useSelector(getArticles.selectAll)
     const view = useSelector(getArticleListView)
     const isLoading = useSelector(getArticleListIsLoading)
+
    
 
     const onChangeView = useCallback((view: ArticleView) => {
         dispatch(articleListPageAction.setView(view))
     }, [dispatch])
 
-    useDynamicReducers(dynamicReducersProps)
 
     useEffect(() => {
-        dispatch(articleListPageAction.initState())
-        dispatch(fetchArticleList({ page: 1 }))
+        dispatch(initArticleListPage())
     }, [dispatch])
 
 

@@ -15,8 +15,10 @@ import { LOCAL_STORAGE_ARTICLE_VIEW_KEY } from "shared/consts/localStorage";
 const articlesAdapter = createEntityAdapter<IArticle, string | number>({
     selectId: (article) => article.id,
 });
+
+
 export const getArticles = articlesAdapter.getSelectors<StateSchema>(
-    (state) => state.articleListPage || articlesAdapter.getInitialState(),
+    (state) => state.articleListPage ?? articlesAdapter.getInitialState(),
 );
 
 
@@ -29,7 +31,8 @@ const articleListPageSlice = createSlice({
         view: 'list',
         page: 1,
         hasMore: false,
-        limit: 4
+        limit: 4,
+        _inited: false
         
     }),
     reducers: {
@@ -42,6 +45,7 @@ const articleListPageSlice = createSlice({
             const view = localStorage.getItem(LOCAL_STORAGE_ARTICLE_VIEW_KEY) as ArticleView
             state.view = view
             state.limit = view === 'tile' ? 9 : 4
+            state._inited = true
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload;

@@ -18,13 +18,21 @@ export function useDynamicReducers(props: UseDynamicReducersProps) {
     const store = useStore() as ReduxStoreWithManager
     const dispatch = useAppDispatch()
 
+    const reducerList = store.reducerManager.getReducerMap()
+
+    const reducersKeys = Object.entries(reducerList).map((key, _) => key[0])
+
     useEffect(() => {
         for (let [key, reducer] of Object.entries(reducers)) {
 
-            store.reducerManager.add(key as StateSchemaKey, reducer)
-            dispatch({ type: `@INIT ${key} reducer` })
+            if (!reducersKeys.includes(key)) {
+
+                store.reducerManager.add(key as StateSchemaKey, reducer)
+                dispatch({ type: `@INIT ${key} reducer` })
+            }
+
         }
-        
+
         return () => {
             if (removeAfterAnmount) {
 
