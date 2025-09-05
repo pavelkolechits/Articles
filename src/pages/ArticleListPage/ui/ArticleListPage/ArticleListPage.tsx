@@ -8,10 +8,11 @@ import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { useCallback, useEffect } from 'react'
 import { fetchArticleList } from '../../model/services/fetchArticleList'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
-import { getArticleListHasMore, getArticleListIsLoading, getArticleListPageNumber, getArticleListView } from '../../model/selectors/articleListPageSelectors'
+import {  getArticleListIsLoading, getArticleListView } from '../../model/selectors/articleListPageSelectors'
 import { ArticleViewSelector } from '../ArticleViewSelector/ArticleViewSelector'
 import { ArticleView } from 'entities/Article/model/types/article'
 import { Page } from 'shared/ui/Page/Page'
+import { fetchNextArticlePage } from 'pages/ArticleListPage/model/services/fetchNextArticlePage'
 
 
 interface ArticleListPageProps {
@@ -31,8 +32,6 @@ const ArticleListPage = (props: ArticleListPageProps) => {
 
     const article = useSelector(getArticles.selectAll)
     const view = useSelector(getArticleListView)
-    const page = useSelector(getArticleListPageNumber)
-    const hasMore = useSelector(getArticleListHasMore)
     const isLoading = useSelector(getArticleListIsLoading)
    
 
@@ -49,12 +48,8 @@ const ArticleListPage = (props: ArticleListPageProps) => {
 
 
     const onLoadNextPage = useCallback(() => {
-     
-        if (hasMore ) {
-            dispatch(articleListPageAction.setPage(page + 1))
-            dispatch(fetchArticleList({ page }))
-        }
-    }, [dispatch, hasMore, page])
+        dispatch(fetchNextArticlePage())
+    }, [dispatch])
 
 
 
