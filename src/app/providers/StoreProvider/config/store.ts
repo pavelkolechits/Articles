@@ -11,6 +11,7 @@ import { ReduxStoreWithManager, StateSchema, ThunkExtraArgs } from './StateSchem
 import { userReducer } from 'entities/User'
 import { createReducerManager } from './reducerManager'
 import { $api } from 'shared/api/api'
+import { scrollPositionReducer } from 'features/ScrollPosition'
 
 const extraArgs: ThunkExtraArgs = {
     api: $api
@@ -19,6 +20,7 @@ const extraArgs: ThunkExtraArgs = {
 export function createReduxStore(initialState: StateSchema): ReduxStoreWithManager {
     const rootReducers: ReducersMapObject<StateSchema> = {
         user: userReducer,
+        scrollPosition: scrollPositionReducer
     }
     const reducerManager = createReducerManager(rootReducers)
    

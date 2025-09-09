@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { classNames } from 'shared/helpers/classNames/classNames'
-import { Page } from 'shared/ui/Page/Page'
+import { Page } from 'widgets/Page/Page'
 
 
 interface NotFoundPageProps {

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch } from 'shared/hoocs/useAppDispatch/useAppDispatch'
 import { fetchArticleComments } from '../../model/services/fetchArticleComments'
 import { ArticleComments } from '../ArticleComments/ArticleComments'
-import { Page } from 'shared/ui/Page/Page'
+import { Page } from 'widgets/Page/Page'
 
 
 interface ArticlePageProps {

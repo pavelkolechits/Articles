@@ -10,6 +10,7 @@ import { ArticleCommentsSchema } from "pages/ArticlePage/model/types/ArticleComm
 import { CreateArticleSchema } from "features/CreateArticleCard/model/types/createArticleSchema";
 import { AddNewCommentSchema } from "features/AddNewComment/model/types/addNewComment";
 import { ArticleListPageSchema } from "pages/ArticleListPage/model/types/articleListPageSchema";
+import { ScrollPositionSchema } from "features/ScrollPosition/model/types/scrollPositionSchema";
 
 
 
@@ -24,7 +25,8 @@ export interface StateSchema {
     createArticle?: CreateArticleSchema,
     articleDraft?: ArticleSchema,
     addNewComment?: AddNewCommentSchema,
-    articleListPage?: ArticleListPageSchema
+    articleListPage?: ArticleListPageSchema,
+    scrollPosition: ScrollPositionSchema
 }
 
 export type StateSchemaKey = keyof StateSchema
@@ -40,7 +42,7 @@ export interface ThunkExtraArgs {
     api: AxiosInstance
 }
 
-export interface ThunkConfig{
+export interface ThunkConfig {
     rejectValue: string;
     extra: ThunkExtraArgs;
     state: StateSchema,

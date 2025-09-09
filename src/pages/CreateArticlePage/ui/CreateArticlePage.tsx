@@ -1,7 +1,7 @@
 import { classNames } from 'shared/helpers/classNames/classNames'
 import { useTranslation } from 'react-i18next'
 import { CreateArticleCard } from 'features/CreateArticleCard'
-import { Page } from 'shared/ui/Page/Page'
+import { Page } from 'widgets/Page/Page'
 
 interface CreateArticlePageProps {
     className?: string
