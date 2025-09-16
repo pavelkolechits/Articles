@@ -16,7 +16,7 @@ interface CountrySelectProps {
     textAlign?: TextAlign
 }
 
-const options: SelectOptions[] = [
+const options: SelectOptions<Country>[] = [
     { value: Country.Armenia, text: Country.Armenia },
     { value: Country.Belarus, text: Country.Belarus },
     { value: Country.Kazakhstan, text: Country.Kazakhstan },

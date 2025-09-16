@@ -5,26 +5,26 @@ import { Input } from '../Input/Input';
 import { ChangeEvent, memo, useCallback, useMemo, useState } from 'react';
 import { Country } from 'entities/Country';
 
-export interface SelectOptions {
+export interface SelectOptions<T> {
     text: string;
-    value: string
+    value: T
 }
 
 export type TextAlign = 'center' | 'start' | 'end'
 
-interface SelectProps {
+interface SelectProps<T extends string> {
     className?: string;
     label?: string;
     textAlign?: TextAlign;
     readonly?: boolean;
-    options?: SelectOptions[];
-    value?: string;
-    onChange?: (value: string) => void
+    options?: SelectOptions<T>[];
+    value?: T;
+    onChange?: (value: T) => void
 }
 
-export const Select = (props: SelectProps) => {
+export const Select =  <T extends string>(props: SelectProps<T>) => {
 
-    const { className, label, textAlign = 'center', readonly, options, value, onChange } = props
+    const { className, label, textAlign = 'center', readonly, options, value , onChange } = props
     const { t } = useTranslation()
 
     const optionList = useMemo(() => {
@@ -39,7 +39,7 @@ export const Select = (props: SelectProps) => {
     }, [options])
 
     const onCangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        onChange?.(e.target.value)
+        onChange?.(e.target.value as T)
     }
 
 

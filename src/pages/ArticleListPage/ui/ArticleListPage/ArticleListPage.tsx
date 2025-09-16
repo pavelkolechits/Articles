@@ -9,11 +9,12 @@ import { useCallback, useEffect } from 'react'
 import { fetchArticleList } from '../../model/services/fetchArticleList'
 import { useDynamicReducers, UseDynamicReducersProps } from 'shared/hoocs/useDynamicReducers/useDynamicReducers'
 import {  getArticleListInited, getArticleListIsLoading, getArticleListView } from '../../model/selectors/articleListPageSelectors'
-import { ArticleViewSelector } from '../ArticleViewSelector/ArticleViewSelector'
+import { ArticleViewSelector } from '../../../../features/ArticleViewSelector/ArticleViewSelector'
 import { ArticleView } from 'entities/Article/model/types/article'
 import { Page } from 'widgets/Page/Page'
 import { fetchNextArticlePage } from 'pages/ArticleListPage/model/services/fetchNextArticlePage'
 import { initArticleListPage } from 'pages/ArticleListPage/model/services/initArticleListPage'
+import { ArticleListFilters } from '../ArticleListFilters/ArticleListFilters'
 
 
 interface ArticleListPageProps {
@@ -40,11 +41,7 @@ const ArticleListPage = (props: ArticleListPageProps) => {
 
    
 
-    const onChangeView = useCallback((view: ArticleView) => {
-        dispatch(articleListPageAction.setView(view))
-    }, [dispatch])
-
-
+   
     useEffect(() => {
         dispatch(initArticleListPage())
     }, [dispatch])
@@ -58,7 +55,7 @@ const ArticleListPage = (props: ArticleListPageProps) => {
 
     return (
         <Page onScrollEnd={onLoadNextPage} className={classNames('', {}, [className])}>
-            <ArticleViewSelector view={view} onViewClick={onChangeView} />
+            <ArticleListFilters/>
             <ArticleList isLoading={isLoading} view={view} articles={article} />
         </Page>
     )

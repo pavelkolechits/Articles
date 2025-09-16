@@ -17,7 +17,7 @@ interface CurrencySelectProps {
 
 }
 
-const options: SelectOptions[] = [
+const options: SelectOptions<Currency>[] = [
     { value: Currency.EUR, text: Currency.EUR },
     { value: Currency.RUB, text: Currency.RUB },
     { value: Currency.USD, text: Currency.USD }

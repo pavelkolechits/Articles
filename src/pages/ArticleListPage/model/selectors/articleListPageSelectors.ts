@@ -6,3 +6,6 @@ export const getArticleListPageNumber = (state: StateSchema) => state.articleLis
 export const getArticleListHasMore = (state: StateSchema) => state.articleListPage?.hasMore || false
 export const getArticleListIsLoading = (state: StateSchema) => state.articleListPage?.isLoading || false
 export const getArticleListInited = (state: StateSchema) => state.articleListPage?._inited
+export const getArticleListSort = (state: StateSchema) => state.articleListPage?.sort ?? 'createdAt'
+export const getArticleListOrder = (state: StateSchema) => state.articleListPage?.order ?? 'asc'
+export const getArticleListSearch = (state: StateSchema) => state.articleListPage?.search ?? ''
