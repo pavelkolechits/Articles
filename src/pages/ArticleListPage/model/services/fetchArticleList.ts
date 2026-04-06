@@ -38,8 +38,9 @@ export const fetchArticleList = createAsyncThunk<
 
             const response = await extra.api.get<FetchArticleListResponse>(`/articles`,
                 {
-                    params: { page, limit, sort, order, q: search }
+                    params: { page, limit, sort, order, q: search}
                 });
+                
             return response.data;
         } catch (e) {
 

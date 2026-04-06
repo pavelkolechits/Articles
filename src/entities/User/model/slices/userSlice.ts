@@ -19,6 +19,7 @@ const userSlice = createSlice({
             if (user) {
                 state.authData = JSON.parse(user),
                 state.inited = true
+                console.log(state.inited)
             }
         },
         logout: (state) => {

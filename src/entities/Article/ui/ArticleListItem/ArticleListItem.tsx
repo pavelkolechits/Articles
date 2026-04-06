@@ -38,9 +38,9 @@ export const ArticleListItem = (props: ArticleListItemProps) => {
             <div className={classNames(cls.ArticlleListItem, {}, [className, cls[view]])}>
                 <Card theme='outlined' className={cls.card}>
                     <div className={cls.header}>
-                        <Avatar alt="/" size={30} src={article?.author.avatar} />
+                        {/* <Avatar alt="/" size={30} src={article?.author.avatar} /> */}
                         <Text
-                            text={`${article?.author.firstname} ${article.author.lastname}`}
+                            // text={`${article?.author.firstname} ${article.author.lastname}`}
                             className={cls.username} />
                         <Text text={article.createdAt} className={cls.date} />
                     </div>
