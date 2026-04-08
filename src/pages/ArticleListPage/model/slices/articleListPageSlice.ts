@@ -3,10 +3,11 @@ import { EntityState, PayloadAction, createEntityAdapter, createSlice } from "@r
 import { StateSchema } from "app/providers/StoreProvider";
 import { IArticle } from "entities/Article";
 import { ArticleListPageSchema } from "../types/articleListPageSchema";
-import { ArticleView } from "entities/Article/model/types/article";
+import { ArticleType, ArticleView } from "entities/Article/model/types/article";
 import { fetchArticleList, FetchArticleListResponse } from "../services/fetchArticleList";
 import { LOCAL_STORAGE_ARTICLE_VIEW_KEY } from "shared/consts/localStorage";
 import { SortField, SortOrder } from "shared/types/sort";
+import { TabItem } from "shared/ui/Tabs/Tabs";
 
 
 
@@ -36,7 +37,8 @@ const articleListPageSlice = createSlice({
         _inited: false,
         order: 'asc',
         search: '',
-        sort: 'createdAt'
+        sort: 'createdAt',
+        type: ArticleType.IT
 
     }),
     reducers: {
@@ -63,6 +65,9 @@ const articleListPageSlice = createSlice({
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
         },
+        setType: (state, action: PayloadAction<ArticleType>) => {
+            state.type = action.payload;
+        },
 
     },
     extraReducers: (builder) => {
@@ -76,8 +81,10 @@ const articleListPageSlice = createSlice({
 
             })
             .addCase(fetchArticleList.fulfilled, (state, action) => {
+
                 state.isLoading = false;
                 state.hasMore = action.payload.hasMore
+
                 if (action.meta.arg.replace) {
                     articlesAdapter.setAll(state, action.payload.articles);
                 } else {

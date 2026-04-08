@@ -11,11 +11,10 @@ export interface ArticleListPageSchema extends EntityState<IArticle, string | nu
     page: number;
     hasMore: boolean
     limit: number;
-    
+    type: ArticleType;
     view: ArticleView;
     order: SortOrder;
     sort: SortField;
     search: string
-
     _inited: boolean;
 }
